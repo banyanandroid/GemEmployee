@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/gr_builders">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/item_text"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp"
+        android:text="Pre Commisioning / Commisioning" />
+
+</LinearLayout>

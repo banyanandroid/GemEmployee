@@ -9,6 +9,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.sdsmdg.tastytoast.TastyToast;
+
 public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     NavigationView mNavigationView;
@@ -57,30 +59,27 @@ public class MainActivity extends AppCompatActivity {
 
                 if (menuItem.getItemId() == R.id.nav_item_reports) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new Fragment_Services()).commit();
+                    fragmentTransaction.replace(R.id.containerView, new Fragment_Reports()).commit();
 
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_csform) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new Fragment_Services()).commit();
+                    fragmentTransaction.replace(R.id.containerView, new Fragment_CSForm()).commit();
 
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_about) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new Fragment_Services()).commit();
 
+                    TastyToast.makeText(getApplicationContext(), "About...", TastyToast.LENGTH_LONG, TastyToast.DEFAULT);
                 }
                 if (menuItem.getItemId() == R.id.nav_item_logout) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new Fragment_Services()).commit();
 
+                    TastyToast.makeText(getApplicationContext(), "Logout...", TastyToast.LENGTH_LONG, TastyToast.INFO);
                 }
                 if (menuItem.getItemId() == R.id.nav_item_exit) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new Fragment_Services()).commit();
 
+                    TastyToast.makeText(getApplicationContext(), "Exit...", TastyToast.LENGTH_LONG, TastyToast.ERROR);
                 }
 
                 return false;

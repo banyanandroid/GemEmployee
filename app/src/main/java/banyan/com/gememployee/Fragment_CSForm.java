@@ -15,7 +15,7 @@ public class Fragment_CSForm extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_complaint_register, null);
+        return inflater.inflate(R.layout.fragment_cs_form, null);
 
 
     }
