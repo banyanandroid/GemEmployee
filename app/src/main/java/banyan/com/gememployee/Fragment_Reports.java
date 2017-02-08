@@ -18,7 +18,7 @@ public class Fragment_Reports extends Fragment {
 
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
-    public static int int_items = 2 ;
+    public static int int_items = 6 ;
 
     @Nullable
     @Override
@@ -68,6 +68,11 @@ public class Fragment_Reports extends Fragment {
           switch (position){
               case 0 : return new Services_Tab_PendingOngoing();
               case 1 : return new Services_Tab_CompletedComplaints();
+              case 2 : return new Services_Tab_CompletedComplaints();
+              case 3 : return new Services_Tab_CompletedComplaints();
+              case 4 : return new Services_Tab_CompletedComplaints();
+              case 5 : return new Services_Tab_CompletedComplaints();
+
           }
         return null;
         }
@@ -88,9 +93,18 @@ public class Fragment_Reports extends Fragment {
 
             switch (position){
                 case 0 :
-                    return "Primary";
+                    return "All";
                 case 1 :
-                    return "My Calls";
+                    return "Warenty/Complaints";
+                case 2 :
+                    return "Out of Warenty / Services";
+                case 3 :
+                    return "Erection";
+                case 4 :
+                    return "Pre-Commisioning/Commisioning";
+                case 5 :
+                    return "AMC";
+
             }
                 return null;
         }
