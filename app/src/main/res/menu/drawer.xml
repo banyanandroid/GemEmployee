@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_item_2"
+        android:icon="@mipmap/ic_launcher"
+        android:title="Compose"></item>
+    <item android:title=" "></item>
+    <item
+        android:icon="@mipmap/ic_launcher"
+        android:title="Services"></item>
+    <item
+        android:icon="@mipmap/ic_launcher"
+        android:title="Complaint"></item>
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:icon="@mipmap/ic_launcher"
+                android:title="About" />
+            <item
+                android:icon="@mipmap/ic_launcher"
+                android:title="Contact" />
+            <item
+                android:icon="@mipmap/ic_launcher"
+                android:title="Privacy" />
+        </menu>
+    </item>
+
+</menu>
