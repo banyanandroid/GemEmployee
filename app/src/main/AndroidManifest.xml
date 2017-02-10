@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="banyan.com.gememployee">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".appcontroller.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,6 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity_Login"></activity>
+        <activity android:name=".Reports_Tab_All"></activity>
+        <activity android:name=".Reports_Tab_Warranty_Complaint"></activity>
+        <activity android:name=".Reports_Tab_OutofWarranty_Service"></activity>
+        <activity android:name=".Reports_Tab_Erection"></activity>
+        <activity android:name=".Reports_Tab_PreCommisioning_Commisioning"></activity>
+        <activity android:name=".Reports_Tab_AMC"></activity>
+
     </application>
 
 </manifest>

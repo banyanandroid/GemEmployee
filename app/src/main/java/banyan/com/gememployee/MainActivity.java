@@ -11,16 +11,37 @@ import android.view.MenuItem;
 
 import com.sdsmdg.tastytoast.TastyToast;
 
+import java.util.HashMap;
+
+import banyan.com.gememployee.global.SessionManager;
+
 public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
 
+    // Session Manager Class
+    SessionManager session;
+
+    String str_name;
+    public static String str_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        session = new SessionManager(getApplicationContext());
+
+        session.checkLogin();
+
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        str_name = user.get(SessionManager.KEY_USER);
+        str_id = user.get(SessionManager.KEY_USER_ID);
 
         /**
          *Setup the DrawerLayout and NavigationView
@@ -75,7 +96,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (menuItem.getItemId() == R.id.nav_item_logout) {
 
-                    TastyToast.makeText(getApplicationContext(), "Logout...", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    try {
+                        session.logoutUser();
+                    }catch (Exception e) {
+
+                    }
+
                 }
                 if (menuItem.getItemId() == R.id.nav_item_exit) {
 

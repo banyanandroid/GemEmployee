@@ -2,4 +2,13 @@
     <string name="app_name">"Gem Employee "</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="product_type">
+        <item>Select Product</item>
+        <item>Dryer</item>
+        <item>Chiller</item>
+        <item>Cooling Tower</item>
+        <item>Others</item>
+    </string-array>
+
 </resources>

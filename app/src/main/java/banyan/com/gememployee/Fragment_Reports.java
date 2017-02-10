@@ -61,8 +61,7 @@ public class Fragment_Reports extends Fragment {
 
                 if (position == 0) {
                     Intent i = new Intent(getActivity(), Reports_Tab_All.class);
-                    startActivity(i);
-                }
+                    startActivity(i);                }
                 if (position == 1) {
 
                     Intent i = new Intent(getActivity(), Reports_Tab_Warranty_Complaint.class);
