@@ -27,6 +27,7 @@ public class Reports_Tab_All extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo);
 
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_leftarrow));
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {

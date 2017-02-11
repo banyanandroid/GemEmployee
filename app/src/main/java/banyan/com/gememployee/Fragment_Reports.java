@@ -37,12 +37,12 @@ public class Fragment_Reports extends Fragment {
             gridArray.clear();
         } catch (Exception e) {
         }
-        Bitmap Ironing = BitmapFactory.decodeResource(this.getResources(), R.drawable.gr_iron);
-        Bitmap Laundry = BitmapFactory.decodeResource(this.getResources(), R.drawable.gr_laundry);
-        Bitmap Builders = BitmapFactory.decodeResource(this.getResources(), R.drawable.gr_builders);
-        Bitmap Corprenter = BitmapFactory.decodeResource(this.getResources(), R.drawable.gr_carprenter);
-        Bitmap Welders = BitmapFactory.decodeResource(this.getResources(), R.drawable.gr_welder);
-        Bitmap Painters = BitmapFactory.decodeResource(this.getResources(), R.drawable.gr_painter);
+        Bitmap Ironing = BitmapFactory.decodeResource(this.getResources(), R.drawable.all);
+        Bitmap Laundry = BitmapFactory.decodeResource(this.getResources(), R.drawable.warranty);
+        Bitmap Builders = BitmapFactory.decodeResource(this.getResources(), R.drawable.outodwarranty);
+        Bitmap Corprenter = BitmapFactory.decodeResource(this.getResources(), R.drawable.erection);
+        Bitmap Welders = BitmapFactory.decodeResource(this.getResources(), R.drawable.presommisioning);
+        Bitmap Painters = BitmapFactory.decodeResource(this.getResources(), R.drawable.amc);
 
         gridArray.add(new Item(Ironing, "All"));
         gridArray.add(new Item(Laundry, "Warranty / Complaints"));

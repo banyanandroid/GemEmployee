@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
                     try {
                         session.logoutUser();
-                    }catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
 

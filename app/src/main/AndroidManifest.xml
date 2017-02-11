@@ -19,12 +19,24 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity_Login"></activity>
-        <activity android:name=".Reports_Tab_All"></activity>
-        <activity android:name=".Reports_Tab_Warranty_Complaint"></activity>
-        <activity android:name=".Reports_Tab_OutofWarranty_Service"></activity>
-        <activity android:name=".Reports_Tab_Erection"></activity>
-        <activity android:name=".Reports_Tab_PreCommisioning_Commisioning"></activity>
-        <activity android:name=".Reports_Tab_AMC"></activity>
+        <activity
+            android:name=".Reports_Tab_All"
+            android:label="ALL Reports"></activity>
+        <activity
+            android:name=".Reports_Tab_Warranty_Complaint"
+            android:label="Warranty Complaint"></activity>
+        <activity
+            android:name=".Reports_Tab_OutofWarranty_Service"
+            android:label="Out Of Warranty"></activity>
+        <activity
+            android:name=".Reports_Tab_Erection"
+            android:label="Erection"></activity>
+        <activity
+            android:name=".Reports_Tab_PreCommisioning_Commisioning"
+            android:label="Pre-Commisioning / Commisioning"></activity>
+        <activity
+            android:name=".Reports_Tab_AMC"
+            android:label="AMC"></activity>
 
     </application>
 
