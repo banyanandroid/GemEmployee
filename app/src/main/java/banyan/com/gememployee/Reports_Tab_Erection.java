@@ -16,7 +16,7 @@ public class Reports_Tab_Erection extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_reports_erection);
+        setContentView(R.layout.fragment_reports_Erection);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
