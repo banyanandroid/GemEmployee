@@ -1,5 +1,6 @@
 package banyan.com.gememployee;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -10,90 +11,44 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * Created by Jo on 7/27/2016.
  */
 public class Fragment_Services extends Fragment {
 
-    public static TabLayout tabLayout;
-    public static ViewPager viewPager;
-    public static int int_items = 2 ;
+    Button btn_Completed_complaints, btn_pending_onprocess;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        /**
-         *Inflate tab_layout and setup Views.
-         */
-            View x =  inflater.inflate(R.layout.tab_layout,null);
-            tabLayout = (TabLayout) x.findViewById(R.id.tabs);
-            viewPager = (ViewPager) x.findViewById(R.id.viewpager);
+        View rootview = inflater.inflate(R.layout.fragment_services, null);
 
-        /**
-         *Set an Apater for the View Pager
-         */
-        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
-        /**
-         * Now , this is a workaround ,
-         * The setupWithViewPager dose't works without the runnable .
-         * Maybe a Support Library Bug .
-         */
+        btn_pending_onprocess = (Button) rootview.findViewById(R.id.servies_btn_pending_onprocess);
+        btn_Completed_complaints = (Button) rootview.findViewById(R.id.servies_btn_completed_complaints);
 
-        tabLayout.post(new Runnable() {
+        btn_pending_onprocess.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                    tabLayout.setupWithViewPager(viewPager);
-                   }
+            public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), Services_Tab_PendingOngoing.class);
+                startActivity(i);
+
+            }
         });
 
-        return x;
+        btn_Completed_complaints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-    }
+                Intent i = new Intent(getActivity(), Services_Tab_CompletedComplaints.class);
+                startActivity(i);
 
-    class MyAdapter extends FragmentPagerAdapter {
-
-        public MyAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        /**
-         * Return fragment with respect to Position .
-         */
-
-        @Override
-        public Fragment getItem(int position)
-        {
-          switch (position){
-              case 0 : return new Services_Tab_PendingOngoing();
-              case 1 : return new Services_Tab_CompletedComplaints();
-          }
-        return null;
-        }
-
-        @Override
-        public int getCount() {
-
-            return int_items;
-
-        }
-
-        /**
-         * This method returns the title of the tab according to the position.
-         */
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-
-            switch (position){
-                case 0 :
-                    return "Pending & OnProcess";
-                case 1 :
-                    return "Completed Complaints";
             }
-                return null;
-        }
-    }
+        });
 
+        return rootview;
+    }
 }

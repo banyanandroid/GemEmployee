@@ -35,6 +35,7 @@
                     android:textSize="18dp" />
 
                 <TextView
+                    android:id="@+id/complaint_txtview_date"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -64,6 +65,7 @@
                     android:textSize="18dp" />
 
                 <TextView
+                    android:id="@+id/complaint_txtview_compno"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -326,10 +328,56 @@
                     android:background="@drawable/bg_parent_rounded_corner">>
 
                     <EditText
-                        android:id="@+id/complaint_edt_Address"
+                        android:id="@+id/complaint_edt_Address1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address"
+                        android:hint="Address (City)"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_parent_rounded_corner">>
+
+                    <EditText
+                        android:id="@+id/complaint_edt_Address2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address (Street)"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_parent_rounded_corner">>
+
+                    <EditText
+                        android:id="@+id/complaint_edt_Address3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address (Land Mark)"
                         android:inputType="text" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -395,6 +443,29 @@
                     android:background="@drawable/bg_parent_rounded_corner">>
 
                     <EditText
+                        android:id="@+id/complaint_edt_addon_phone_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Add on Phone Number"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_parent_rounded_corner">>
+
+                    <EditText
                         android:id="@+id/complaint_edt_customer_cellno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -441,12 +512,43 @@
                     android:background="@drawable/bg_parent_rounded_corner">>
 
                     <EditText
-                        android:id="@+id/complaint_edt_nature_complaint"
+                        android:id="@+id/complaint_edt_addon_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nature of Complaint"
+                        android:hint="Add on E-Mail"
                         android:inputType="text" />
                 </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <Button
+                    android:id="@+id/complaint_btn_reset"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:background="@color/colorAccent"
+                    android:text="reset"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/complaint_btn_submit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:background="@color/colorAccent"
+                    android:text="Submit"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 

@@ -12,7 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 import banyan.com.gememployee.global.AppConfig;
+import banyan.com.gememployee.global.SessionManager;
 
 import static banyan.com.gememployee.Activity_Login.queue;
 
@@ -45,8 +49,23 @@ public class Fragment_ComplaintRegister extends Fragment {
     String TAG = "Complaints";
     private static final String TAG_NAME = "name";
 
+    // Session Manager Class
+    SessionManager session;
+
+    EditText edt_mc1, edt_mc2, edt_mc3, edt_warranty_Status, edt_companyname, edt_city, edt_street, edt_landmark,
+            edt_contact_person_name, edt_phone_no, edt_addon_phone, edt_customer_cellno, edt_email, edt_addon_email;
+
+    TextView txt_date, txt_complaint_no;
+
+    Button btn_reset, btn_submit;
+
     String str_selected_product, str_selected_model, str_selected_complaint_category, str_selected_complaint_type, str_selected_dealer;
     String str_delar;
+
+    String str_send_date, str_send_user_id, str_send_complaint_no, str_send_complaint_date, str_send_product_name, str_send_model,
+            str_send_complaint_category, str_send_complaint_type, str_send_pur_through, str_Send_mc1, str_send_mc2, str_send_mc3,
+            str_send_warranty_status, str_send_company_name, str_send_address1, str_send_address2, str_send_address3,
+            str_send_contact_person_name, str_send_phone_number, str_send_addon_phone_number, str_send_email, str_send_addon_email;
 
     ArrayList<String> Arraylist_dealers = null;
     String[] Arraylist_product_model;
@@ -64,6 +83,11 @@ public class Fragment_ComplaintRegister extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_complaint_register, null);
 
+        // TextView
+
+        txt_date = (TextView) rootView.findViewById(R.id.complaint_txtview_date);
+        txt_complaint_no = (TextView) rootView.findViewById(R.id.complaint_txtview_compno);
+
         // Spinners
         spn_product = (Spinner) rootView.findViewById(R.id.complaint_spinner_product);
         spn_product_model = (Spinner) rootView.findViewById(R.id.complaint_spinner_product_model);
@@ -71,9 +95,42 @@ public class Fragment_ComplaintRegister extends Fragment {
         spn_complaint_type = (Spinner) rootView.findViewById(R.id.complaint_spinner_complaint_type);
         spn_purchaced_through = (Spinner) rootView.findViewById(R.id.complaint_spinner_purchased_through);
 
+        // Edit Text
+
+        edt_mc1 = (EditText) rootView.findViewById(R.id.complaint_edt_mcsl1);
+        edt_mc2 = (EditText) rootView.findViewById(R.id.complaint_edt_mcsl2);
+        edt_mc3 = (EditText) rootView.findViewById(R.id.complaint_edt_mcsl3);
+
+        edt_warranty_Status = (EditText) rootView.findViewById(R.id.complaint_edt_warranty);
+        edt_companyname = (EditText) rootView.findViewById(R.id.complaint_edt_company_name);
+        edt_city = (EditText) rootView.findViewById(R.id.complaint_edt_Address1);
+        edt_street = (EditText) rootView.findViewById(R.id.complaint_edt_Address2);
+        edt_landmark = (EditText) rootView.findViewById(R.id.complaint_edt_Address3);
+        edt_contact_person_name = (EditText) rootView.findViewById(R.id.complaint_edt_contact_person);
+        edt_phone_no = (EditText) rootView.findViewById(R.id.complaint_edt_phone_no);
+        edt_addon_phone = (EditText) rootView.findViewById(R.id.complaint_edt_addon_phone_no);
+        edt_customer_cellno = (EditText) rootView.findViewById(R.id.complaint_edt_customer_cellno);
+        edt_email = (EditText) rootView.findViewById(R.id.complaint_edt_email);
+        edt_addon_email = (EditText) rootView.findViewById(R.id.complaint_edt_addon_email);
+
+        // Button
+
+        btn_reset = (Button) rootView.findViewById(R.id.complaint_btn_reset);
+        btn_submit = (Button) rootView.findViewById(R.id.complaint_btn_submit);
+
+
         //String Array
 
         Arraylist_dealers = new ArrayList<String>();
+
+        // Session Variables
+        session = new SessionManager(getActivity());
+
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        str_send_user_id = user.get(SessionManager.KEY_USER_ID);
 
 
         /*******************************
@@ -384,6 +441,131 @@ public class Fragment_ComplaintRegister extends Fragment {
         } catch (Exception e) {
 
         }
+
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                str_send_date = txt_date.getText().toString();
+                str_send_complaint_no = txt_complaint_no.getText().toString();
+                str_send_product_name = str_selected_product;
+                str_send_model = str_selected_model;
+                str_send_complaint_category = str_selected_complaint_category;
+                str_send_complaint_type = str_selected_complaint_type;
+                str_send_pur_through = str_selected_dealer;
+                str_Send_mc1 = edt_mc1.getText().toString();
+                str_send_mc2 = edt_mc2.getText().toString();
+                str_send_mc3 = edt_mc3.getText().toString();
+                str_send_warranty_status = edt_warranty_Status.getText().toString();
+                str_send_company_name = edt_companyname.getText().toString();
+                str_send_address1 = edt_city.getText().toString();
+                str_send_address2 = edt_street.getText().toString();
+                str_send_address3 = edt_landmark.getText().toString();
+                str_send_contact_person_name = edt_contact_person_name.getText().toString();
+                str_send_phone_number = edt_phone_no.getText().toString();
+                str_send_addon_phone_number = edt_addon_phone.getText().toString();
+                str_send_email = edt_email.getText().toString();
+                str_send_addon_email = edt_addon_email.getText().toString();
+
+                if (str_send_user_id.equals("")) {
+                    TastyToast.makeText(getActivity(), "User Id Not Found !", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                } else if (str_send_date.equals("")) {
+                    TastyToast.makeText(getActivity(), "Date Error !", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                } else if (str_send_complaint_no.equals("")) {
+                    TastyToast.makeText(getActivity(), "Complaint No Error !", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                } else if (str_send_product_name.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please Select a Valid Product", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                } else if (str_send_model.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please Select a Valid Model", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                } else if (str_send_complaint_category.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please Select a Valid Complaint Category", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                } else if (str_send_complaint_type.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please Select a Valid Complaint Type", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                } else if (str_send_pur_through.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please Select a Valid Dealer", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                } else if (str_Send_mc1.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please Enter MC / SL.No", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_mc1.setError("Please Enter a Valid Number");
+                } else if (str_send_mc2.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please Enter MC / SL.No", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_mc2.setError("Please Enter a Valid Number");
+                } else if (str_send_mc3.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please Enter MC / SL.No", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_mc3.setError("Please Enter a Valid Number");
+                } else if (str_send_warranty_status.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please enter Warranty details", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_warranty_Status.setError("Please Enter a Vaild Warranty");
+                } else if (str_send_company_name.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please enter Company Name", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_companyname.setError("Please Enter a Vaild Company Name");
+                } else if (str_send_address1.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please enter Valid City", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_city.setError("Please Enter a Vaild City");
+                } else if (str_send_address2.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please enter Valid Street", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_street.setError("Please Enter a Vaild Street");
+                } else if (str_send_address3.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please enter Valid Landmark", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_landmark.setError("Please Enter a Vaild Landmark");
+                } else if (str_send_contact_person_name.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please enter Contact Person Name", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_contact_person_name.setError("Please Enter a Contact Person name");
+                } else if (str_send_phone_number.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please enter Phone Number", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_phone_no.setError("Please Enter a Vaild Phone Number");
+                } else if (str_send_email.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please enter Email", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_addon_phone.setError("Please Enter a Email");
+                } else {
+
+                    str_send_date = txt_date.getText().toString();
+                    str_send_complaint_no = txt_complaint_no.getText().toString();
+                    str_send_product_name = str_selected_product;
+                    str_send_model = str_selected_model;
+                    str_send_complaint_category = str_selected_complaint_category;
+                    str_send_complaint_type = str_selected_complaint_type;
+                    str_send_pur_through = str_selected_dealer;
+                    str_Send_mc1 = edt_mc1.getText().toString();
+                    str_send_mc2 = edt_mc2.getText().toString();
+                    str_send_mc3 = edt_mc3.getText().toString();
+                    str_send_warranty_status = edt_warranty_Status.getText().toString();
+                    str_send_company_name = edt_companyname.getText().toString();
+                    str_send_address1 = edt_city.getText().toString();
+                    str_send_address2 = edt_street.getText().toString();
+                    str_send_address3 = edt_landmark.getText().toString();
+                    str_send_contact_person_name = edt_contact_person_name.getText().toString();
+                    str_send_phone_number = edt_phone_no.getText().toString();
+                    str_send_addon_phone_number = edt_addon_phone.getText().toString();
+                    str_send_email = edt_email.getText().toString();
+                    str_send_addon_email = edt_addon_email.getText().toString();
+
+                    System.out.println("str_send_date " + " : " + str_send_date);
+                    System.out.println("str_send_complaint_no " + " : " + str_send_complaint_no);
+                    System.out.println("str_send_product_name " + " : " + str_send_product_name);
+                    System.out.println("str_send_model " + " : " + str_send_model);
+                    System.out.println("str_send_complaint_category " + " : " + str_send_complaint_category);
+                    System.out.println("str_send_complaint_type " + " : " + str_send_complaint_type);
+                    System.out.println("str_send_pur_through " + " : " + str_send_pur_through);
+                    System.out.println("str_Send_mc1 " + " : " + str_Send_mc1);
+                    System.out.println("str_send_mc2 " + " : " + str_send_mc2);
+                    System.out.println("str_send_mc3 " + " : " + str_send_mc3);
+                    System.out.println("str_send_warranty_status " + " : " + str_send_warranty_status);
+                    System.out.println("str_send_company_name " + " : " + str_send_company_name);
+                    System.out.println("str_send_address1 " + " : " + str_send_address1);
+                    System.out.println("str_send_address2 " + " : " + str_send_address2);
+                    System.out.println("str_send_address3 " + " : " + str_send_address3);
+                    System.out.println("str_send_contact_person_name " + " : " + str_send_contact_person_name);
+                    System.out.println("str_send_phone_number " + " : " + str_send_phone_number);
+                    System.out.println("str_send_addon_phone_number " + " : " + str_send_addon_phone_number);
+                    System.out.println("str_send_email " + " : " + str_send_email);
+                    System.out.println("str_send_addon_email " + " : " + str_send_addon_email);
+
+
+                }
+
+            }
+        });
 
         return rootView;
     }

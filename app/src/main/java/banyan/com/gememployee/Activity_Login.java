@@ -118,7 +118,7 @@ public class Activity_Login extends Activity {
                         System.out.println("SRRRR : " + result);
                         JSONObject user_details = result.getJSONObject("userdetails");
 
-                        String str_id = user_details.getString("id");
+                        String str_id = user_details.getString("emp_code");
                         String str_user_name = user_details.getString("emp_name");
 
                         session.createLoginSession(str_user_name, str_id);

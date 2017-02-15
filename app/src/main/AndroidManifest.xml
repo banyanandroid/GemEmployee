@@ -20,6 +20,12 @@
         </activity>
         <activity android:name=".Activity_Login"></activity>
         <activity
+            android:name=".Services_Tab_PendingOngoing"
+            android:label="Pending and On Going"></activity>
+        <activity
+            android:name=".Services_Tab_CompletedComplaints"
+            android:label="Completed Complaints"></activity>
+        <activity
             android:name=".Reports_Tab_All"
             android:label="ALL Reports"></activity>
         <activity

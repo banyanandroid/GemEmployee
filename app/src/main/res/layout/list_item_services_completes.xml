@@ -6,47 +6,46 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="3.5">
 
         <TextView
+            android:id="@+id/list_item_completed_comp_no"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:text="SL No"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:padding="20dp"
+            android:text="E170294"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/list_item_completed_cus_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Complaint\nNo"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:layout_centerVertical="true"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="Schedule QC"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/list_item_completed_comp_status"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_centerVertical="true"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="Customer\nName"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Complaint\nStatus"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="Schedule QC"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
