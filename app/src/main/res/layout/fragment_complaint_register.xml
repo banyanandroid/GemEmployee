@@ -32,7 +32,7 @@
                     android:gravity="center|left"
                     android:text="Date"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/complaint_txtview_date"
@@ -43,7 +43,7 @@
                     android:gravity="center|left"
                     android:text="hh:mm:yyyy"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -62,7 +62,7 @@
                     android:gravity="center|left"
                     android:text="Complaint Number"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/complaint_txtview_compno"
@@ -70,9 +70,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/bg_parent_rounded_corner"
-                    android:text="10001"
+                    android:text="1000"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -91,7 +91,7 @@
                     android:gravity="center|left"
                     android:text="Product"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
                 <Spinner
                     android:id="@+id/complaint_spinner_product"
@@ -99,7 +99,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -118,7 +118,7 @@
                     android:gravity="center|left"
                     android:text="Product Model"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
                 <Spinner
                     android:id="@+id/complaint_spinner_product_model"
@@ -126,7 +126,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -145,7 +145,7 @@
                     android:gravity="center|left"
                     android:text="Complaint Category"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
                 <Spinner
                     android:id="@+id/complaint_spinner_product_category"
@@ -153,7 +153,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -172,7 +172,7 @@
                     android:gravity="center|left"
                     android:text="Complaint Type"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
                 <Spinner
                     android:id="@+id/complaint_spinner_complaint_type"
@@ -180,7 +180,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -199,7 +199,7 @@
                     android:gravity="center|left"
                     android:text="Purchased Through"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
                 <Spinner
                     android:id="@+id/complaint_spinner_purchased_through"
@@ -207,7 +207,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -226,7 +226,7 @@
                     android:gravity="center|left"
                     android:text="MC / SL.No"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -242,8 +242,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:background="@drawable/bg_parent_rounded_corner"
+                        android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="18dp" />
+                        android:textSize="16dp" />
 
                     <EditText
                         android:id="@+id/complaint_edt_mcsl2"
@@ -251,8 +252,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/bg_parent_rounded_corner"
+                        android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="18dp" />
+                        android:textSize="16dp" />
 
                     <EditText
                         android:id="@+id/complaint_edt_mcsl3"
@@ -260,8 +262,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/bg_parent_rounded_corner"
+                        android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="18dp" />
+                        android:textSize="16dp" />
 
 
                 </LinearLayout>
@@ -286,7 +289,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Warranty Status"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -309,7 +313,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Company Name"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -332,7 +337,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address (City)"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -355,7 +361,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address (Street)"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -378,7 +385,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address (Land Mark)"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -401,7 +409,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Contact Person Name"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -424,7 +433,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Phone Number"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -447,7 +457,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Add on Phone Number"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -470,7 +481,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Customer Cell No"
-                        android:inputType="phone" />
+                        android:inputType="phone"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -493,7 +505,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="E-Mail"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -516,7 +529,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Add on E-Mail"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>

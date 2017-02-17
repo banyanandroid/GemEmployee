@@ -49,6 +49,8 @@ public class Fragment_ComplaintRegister extends Fragment {
     String TAG = "Complaints";
     private static final String TAG_NAME = "name";
 
+    private static final String TAG_COMPLAINT_NO = "complaint_no";
+
     // Session Manager Class
     SessionManager session;
 
@@ -60,7 +62,7 @@ public class Fragment_ComplaintRegister extends Fragment {
     Button btn_reset, btn_submit;
 
     String str_selected_product, str_selected_model, str_selected_complaint_category, str_selected_complaint_type, str_selected_dealer;
-    String str_delar;
+    String str_delar, str_complaint_number;
 
     String str_send_date, str_send_user_id, str_send_complaint_no, str_send_complaint_date, str_send_product_name, str_send_model,
             str_send_complaint_category, str_send_complaint_type, str_send_pur_through, str_Send_mc1, str_send_mc2, str_send_mc3,
@@ -151,25 +153,21 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 str_selected_product = parent.getItemAtPosition(pos).toString();
 
-                if (str_selected_product.equals("")) {
+                if (str_selected_product.equals("null")) {
 
                     TastyToast.makeText(getActivity(), "Please Select Product", TastyToast.LENGTH_LONG, TastyToast.INFO);
-
-                } else if (str_selected_product.equals("Select Product")) {
-
-                    TastyToast.makeText(getActivity(), "Please Select a Valid Product", TastyToast.LENGTH_LONG, TastyToast.INFO);
 
                 } else if (str_selected_product.equals("Dryer")) {
 
                     // Product Model Loder
-                    Arraylist_product_model = new String[]{"Select Model", "NXG", "2KD", "2KD7", "2KW", "RAD", "HLN", "HLD", "SPD"};
+                    Arraylist_product_model = new String[]{"NXG", "2KD", "2KD7", "2KW", "RAD", "HLN", "HLD", "SPD"};
                     List<String> produt_type = new ArrayList<String>(Arrays.asList(Arraylist_product_model));
                     ArrayAdapter<String> adapter_product_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, produt_type);
                     adapter_product_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_product_model.setAdapter(adapter_product_type);
 
                     // Complaint Type Loader
-                    Arraylist_complaint_type = new String[]{"Select Complaint", "Autodrain Not opening/fully open", "Air Leak/Air pr.drop"
+                    Arraylist_complaint_type = new String[]{"Autodrain Not opening/fully open", "Air Leak/Air pr.drop"
                             , "Compressor not running", "Electrical Related Issues", "Evaporater / Heat Exchanger Failure", "Fan Motor  not running"
                             , "Gas leakage/ LP Open", "High  / Low Dew Point/Moisture in line", "Noise/Vibration", "Performance Issues", "Tem.controller / PLC failure"
                             , "Trip  (OLR, SPP, MCB, LP, HP, LOW WATER)", "Others"};
@@ -181,14 +179,14 @@ public class Fragment_ComplaintRegister extends Fragment {
                 } else if (str_selected_product.equals("Chiller")) {
 
                     // Product Model Loder
-                    Arraylist_product_model = new String[]{"Select Model", "CHILLER"};
+                    Arraylist_product_model = new String[]{"CHILLER"};
                     List<String> produt_type = new ArrayList<String>(Arrays.asList(Arraylist_product_model));
                     ArrayAdapter<String> adapter_product_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, produt_type);
                     adapter_product_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_product_model.setAdapter(adapter_product_type);
 
                     // Complaint Type Loader
-                    Arraylist_complaint_type = new String[]{"Select Complaint", "AFT / PHE Failure", "Compressor Failure", "Electrical Failure", "Fan Motor  Failure"
+                    Arraylist_complaint_type = new String[]{"AFT / PHE Failure", "Compressor Failure", "Electrical Failure", "Fan Motor  Failure"
                             , "Flow Switch Failure", "FRP Tank Leakage", "Gas leakage", "high /Low pressure switch failure", "Noise", "Performance Issues", "Pump Failure"
                             , "Tem.controller / PLC failure", "Transit", "Trip  (OLR, SPP, MCB, LOW WATER)", "Others"};
                     List<String> compaint_type = new ArrayList<String>(Arrays.asList(Arraylist_complaint_type));
@@ -199,14 +197,14 @@ public class Fragment_ComplaintRegister extends Fragment {
                 } else if (str_selected_product.equals("Cooling Tower")) {
 
                     // Product Model Loder
-                    Arraylist_product_model = new String[]{"Select Model", "GCT +", "GCT", "SCT/SCB", "DRY COOLING TOWER"};
+                    Arraylist_product_model = new String[]{"GCT +", "GCT", "SCT/SCB", "DRY COOLING TOWER"};
                     List<String> produt_type = new ArrayList<String>(Arrays.asList(Arraylist_product_model));
                     ArrayAdapter<String> adapter_product_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, produt_type);
                     adapter_product_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_product_model.setAdapter(adapter_product_type);
 
                     // Complaint Type Loader
-                    Arraylist_complaint_type = new String[]{"Select Complaint", "Leak", "Fan Damage", "Motor Failure", "Noise/Vibration", "Performance Issues", "Spinkler Failure", "Others"};
+                    Arraylist_complaint_type = new String[]{"Leak", "Fan Damage", "Motor Failure", "Noise/Vibration", "Performance Issues", "Spinkler Failure", "Others"};
                     List<String> compaint_type = new ArrayList<String>(Arrays.asList(Arraylist_complaint_type));
                     ArrayAdapter<String> adapter_compaint_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, compaint_type);
                     adapter_compaint_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -215,14 +213,14 @@ public class Fragment_ComplaintRegister extends Fragment {
                 } else if (str_selected_product.equals("Others")) {
 
                     // Product Model Loder
-                    Arraylist_product_model = new String[]{"Select Model", "SMALL PRODUCTS"};
+                    Arraylist_product_model = new String[]{"SMALL PRODUCTS"};
                     List<String> produt_type = new ArrayList<String>(Arrays.asList(Arraylist_product_model));
                     ArrayAdapter<String> adapter_product_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, produt_type);
                     adapter_product_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_product_model.setAdapter(adapter_product_type);
 
                     // Complaint Type Loader
-                    Arraylist_complaint_type = new String[]{"Select Complaint", "On Call"};
+                    Arraylist_complaint_type = new String[]{"On Call"};
                     List<String> compaint_type = new ArrayList<String>(Arrays.asList(Arraylist_complaint_type));
                     ArrayAdapter<String> adapter_compaint_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, compaint_type);
                     adapter_compaint_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -248,15 +246,11 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 str_selected_model = parent.getItemAtPosition(pos).toString();
 
-                if (str_selected_model.equals("")) {
-
-                } else if (str_selected_model.equals("Select Model")) {
-
+                if (str_selected_model.equals("null")) {
                     TastyToast.makeText(getActivity(), "Please Select a Valid Model", TastyToast.LENGTH_LONG, TastyToast.INFO);
-
                 } else if (str_selected_model.equals("NXG")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -264,7 +258,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("2KD")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -272,7 +266,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("2KD7")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -280,7 +274,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("2KW")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -288,7 +282,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("RAD")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "PRE COMMISSIONING", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -296,7 +290,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("HLN")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -304,7 +298,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("HLD")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -312,7 +306,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("SPD")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -320,7 +314,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("GCT +")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -328,7 +322,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("GCT")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -336,7 +330,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("SCT/SCB")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -344,7 +338,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("DRY COOLING TOWER")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -352,7 +346,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("CHILLER")) {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "PRE COMMISSIONING", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
+                    Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -360,7 +354,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else {
 
-                    Arraylist_complaint_category = new String[]{"Select Category", "On calls"};
+                    Arraylist_complaint_category = new String[]{"On calls"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -385,7 +379,6 @@ public class Fragment_ComplaintRegister extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
                 str_selected_complaint_category = parent.getItemAtPosition(pos).toString();
-                TastyToast.makeText(getActivity(), str_selected_complaint_category, TastyToast.LENGTH_LONG, TastyToast.INFO);
             }
 
             @Override
@@ -403,7 +396,6 @@ public class Fragment_ComplaintRegister extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
                 str_selected_complaint_type = parent.getItemAtPosition(pos).toString();
-                TastyToast.makeText(getActivity(), str_selected_complaint_type, TastyToast.LENGTH_LONG, TastyToast.INFO);
             }
 
             @Override
@@ -474,15 +466,15 @@ public class Fragment_ComplaintRegister extends Fragment {
                     TastyToast.makeText(getActivity(), "Date Error !", TastyToast.LENGTH_LONG, TastyToast.ERROR);
                 } else if (str_send_complaint_no.equals("")) {
                     TastyToast.makeText(getActivity(), "Complaint No Error !", TastyToast.LENGTH_LONG, TastyToast.ERROR);
-                } else if (str_send_product_name.equals("")) {
+                } else if (str_send_product_name.equals("null")) {
                     TastyToast.makeText(getActivity(), "Please Select a Valid Product", TastyToast.LENGTH_LONG, TastyToast.INFO);
-                } else if (str_send_model.equals("")) {
+                } else if (str_send_model.equals("null")) {
                     TastyToast.makeText(getActivity(), "Please Select a Valid Model", TastyToast.LENGTH_LONG, TastyToast.INFO);
-                } else if (str_send_complaint_category.equals("")) {
+                } else if (str_send_complaint_category.equals("null")) {
                     TastyToast.makeText(getActivity(), "Please Select a Valid Complaint Category", TastyToast.LENGTH_LONG, TastyToast.INFO);
-                } else if (str_send_complaint_type.equals("")) {
+                } else if (str_send_complaint_type.equals("null")) {
                     TastyToast.makeText(getActivity(), "Please Select a Valid Complaint Type", TastyToast.LENGTH_LONG, TastyToast.INFO);
-                } else if (str_send_pur_through.equals("")) {
+                } else if (str_send_pur_through.equals("null")) {
                     TastyToast.makeText(getActivity(), "Please Select a Valid Dealer", TastyToast.LENGTH_LONG, TastyToast.INFO);
                 } else if (str_Send_mc1.equals("")) {
                     TastyToast.makeText(getActivity(), "Please Enter MC / SL.No", TastyToast.LENGTH_LONG, TastyToast.INFO);
@@ -519,27 +511,6 @@ public class Fragment_ComplaintRegister extends Fragment {
                     edt_addon_phone.setError("Please Enter a Email");
                 } else {
 
-                    str_send_date = txt_date.getText().toString();
-                    str_send_complaint_no = txt_complaint_no.getText().toString();
-                    str_send_product_name = str_selected_product;
-                    str_send_model = str_selected_model;
-                    str_send_complaint_category = str_selected_complaint_category;
-                    str_send_complaint_type = str_selected_complaint_type;
-                    str_send_pur_through = str_selected_dealer;
-                    str_Send_mc1 = edt_mc1.getText().toString();
-                    str_send_mc2 = edt_mc2.getText().toString();
-                    str_send_mc3 = edt_mc3.getText().toString();
-                    str_send_warranty_status = edt_warranty_Status.getText().toString();
-                    str_send_company_name = edt_companyname.getText().toString();
-                    str_send_address1 = edt_city.getText().toString();
-                    str_send_address2 = edt_street.getText().toString();
-                    str_send_address3 = edt_landmark.getText().toString();
-                    str_send_contact_person_name = edt_contact_person_name.getText().toString();
-                    str_send_phone_number = edt_phone_no.getText().toString();
-                    str_send_addon_phone_number = edt_addon_phone.getText().toString();
-                    str_send_email = edt_email.getText().toString();
-                    str_send_addon_email = edt_addon_email.getText().toString();
-
                     System.out.println("str_send_date " + " : " + str_send_date);
                     System.out.println("str_send_complaint_no " + " : " + str_send_complaint_no);
                     System.out.println("str_send_product_name " + " : " + str_send_product_name);
@@ -561,6 +532,17 @@ public class Fragment_ComplaintRegister extends Fragment {
                     System.out.println("str_send_email " + " : " + str_send_email);
                     System.out.println("str_send_addon_email " + " : " + str_send_addon_email);
 
+                    try {
+                        pDialog = new ProgressDialog(getActivity());
+                        pDialog.setMessage("Please wait...");
+                        pDialog.show();
+                        pDialog.setCancelable(false);
+                        queue = Volley.newRequestQueue(getActivity());
+                        Register_Complaint();
+                    } catch (Exception e) {
+
+                    }
+
 
                 }
 
@@ -576,7 +558,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
     private void Function_GetDelars() {
 
-        String url_dealers = "http://gemservice.in/employee_app/WebService.php?operation=dealerlist";
+        String url_dealers = "http://gemservice.in/employee_app/webservice_2017.php?operation=dealerlist";
 
         StringRequest request = new StringRequest(Request.Method.POST,
                 url_dealers, new Response.Listener<String>() {
@@ -612,6 +594,10 @@ public class Fragment_ComplaintRegister extends Fragment {
                                     .setAdapter(new ArrayAdapter<String>(getActivity(),
                                             android.R.layout.simple_spinner_dropdown_item,
                                             Arraylist_dealers));
+
+                            queue = Volley.newRequestQueue(getActivity());
+                            complaint_no();
+
                         } catch (Exception e) {
 
                         }
@@ -635,6 +621,177 @@ public class Fragment_ComplaintRegister extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        queue.add(request);
+    }
+
+    /********************************
+     * Complaint Number
+     *********************************/
+
+    private void complaint_no() {
+
+        String url_dealers = "http://gemservice.in/employee_app/webservice_2017.php?operation=complaint_number";
+
+        StringRequest request = new StringRequest(Request.Method.POST,
+                url_dealers, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, response.toString());
+                Log.d("Complaint_Number", response.toString());
+
+                String str_response1 = response.toString();
+
+                if (str_response1.equals("")) {
+
+                    TastyToast.makeText(getActivity(), "Internal Error !", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+
+                } else {
+                    try {
+                        JSONObject obj = new JSONObject(response);
+                        JSONArray arr;
+                        arr = obj.getJSONArray("result");
+
+
+                        for (int i = 0; arr.length() > i; i++) {
+                            JSONObject obj1 = arr.getJSONObject(i);
+
+                            str_complaint_number = obj1.getString(TAG_COMPLAINT_NO);
+
+                        }
+
+                        int complaint_no = Integer.parseInt(str_complaint_number);
+
+                        System.out.print(" Complaint Number : " + complaint_no);
+
+                        complaint_no = complaint_no + 1;
+
+                        txt_complaint_no.setText("" + complaint_no);
+
+                    } catch (JSONException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+
+
+                pDialog.hide();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.hide();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        queue.add(request);
+    }
+
+
+    /********************************
+     * Register Complaint
+     *********************************/
+
+    private void Register_Complaint() {
+
+        /*String url_complaint_register = "http://gemservice.in/employee_app/webservice_2017.php?operation=Complaint_registeration&user="+str_send_user_id+
+                "&compno="+str_send_complaint_no+"&comp_cate="+str_send_complaint_category+"&comp_type="+str_send_complaint_type+
+                "&pd_name="+str_send_product_name+"&model="+str_send_model+"&pur_through="+str_send_pur_through+"&mcsnum="+str_Send_mc1+
+                "&mcs2="+str_send_mc2+"&mcs3="+str_send_mc3+"&warranty="+str_send_warranty_status+"&customername="+str_send_company_name+
+                "&street="+str_send_address1+"&landmark="+str_send_address2+"&city="+str_send_address3+"&contactperson="+str_send_contact_person_name+
+                "&phoneno="+str_send_phone_number+"&addon_phoneno="+str_send_addon_phone_number+"&email="+str_send_email+"&addon_email="+str_send_addon_email;*/
+
+        String str_register_complaint = "http://gemservice.in/employee_app/complaint_register.php";
+
+        StringRequest request = new StringRequest(Request.Method.POST,
+                str_register_complaint, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, response.toString());
+                Log.d("Complaint_Number", response.toString());
+
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    int success = obj.getInt("success");
+
+                    System.out.println("REG" + success);
+
+                    if (success == 1) {
+
+                        TastyToast.makeText(getActivity(), "Complaint Registered Successfully :)", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                        pDialog.hide();
+                        try {
+
+
+                        } catch (Exception e) {
+                            // TODO: handle exception
+                        }
+
+                    } else {
+
+                        TastyToast.makeText(getActivity(), "Something Went Wrong :(", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                        pDialog.hide();
+
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+
+                pDialog.hide();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.hide();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("user", str_send_user_id);
+                params.put("compno", str_send_complaint_no);
+                params.put("comp_cate", str_send_complaint_category);
+                params.put("comp_type", str_send_complaint_type);
+                params.put("pd_name", str_send_product_name);
+                params.put("model", str_send_model);
+                params.put("pur_through", str_send_pur_through);
+                params.put("mcsnum", str_Send_mc1);
+                params.put("mcs2", str_send_mc2);
+                params.put("mcs3", str_send_mc3);
+                params.put("warranty", str_send_warranty_status);
+                params.put("customername", str_send_company_name);
+                params.put("street", str_send_address1);
+                params.put("landmark", str_send_address2);
+                params.put("city", str_send_address3);
+                params.put("contactperson", str_send_contact_person_name);
+                params.put("phoneno", str_send_phone_number);
+                params.put("addon_phoneno", str_send_addon_phone_number);
+                params.put("email", str_send_email);
+                params.put("addon_email", str_send_addon_email);
 
                 return params;
             }
