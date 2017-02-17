@@ -569,7 +569,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
     private void Function_GetDelars() {
 
-        String url_dealers = "http://gemservice.in/employee_app/webservice_2017.php?operation=dealerlist";
+        String url_dealers = "http://gemservice.in/employee_app/2017_webservice.php?operation=dealerlist";
 
         StringRequest request = new StringRequest(Request.Method.POST,
                 url_dealers, new Response.Listener<String>() {
@@ -648,7 +648,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
     private void complaint_no() {
 
-        String url_dealers = "http://gemservice.in/employee_app/webservice_2017.php?operation=complaint_number";
+        String url_dealers = "http://gemservice.in/employee_app/2017_webservice.php?operation=complaint_number";
 
         StringRequest request = new StringRequest(Request.Method.POST,
                 url_dealers, new Response.Listener<String>() {
@@ -730,7 +730,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 "&street="+str_send_address1+"&landmark="+str_send_address2+"&city="+str_send_address3+"&contactperson="+str_send_contact_person_name+
                 "&phoneno="+str_send_phone_number+"&addon_phoneno="+str_send_addon_phone_number+"&email="+str_send_email+"&addon_email="+str_send_addon_email;*/
 
-        String str_register_complaint = "http://gemservice.in/employee_app/complaint_register.php";
+        String str_register_complaint = "http://gemservice.in/employee_app/2017_complaint_register.php";
 
         StringRequest request = new StringRequest(Request.Method.POST,
                 str_register_complaint, new Response.Listener<String>() {

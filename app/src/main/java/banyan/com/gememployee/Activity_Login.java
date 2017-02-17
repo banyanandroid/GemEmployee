@@ -98,7 +98,7 @@ public class Activity_Login extends Activity {
 
     private void Function_Authentication() {
 
-        String str_url = "http://gemservice.in/employee_app/WebService.php?operation=login" + "&username=" + user_name + "&password=" + user_password;
+        String str_url = "http://gemservice.in/employee_app/2017_webservice.php?operation=login" + "&username=" + user_name + "&password=" + user_password;
 
         System.out.println("Final URL : " + str_url);
 
