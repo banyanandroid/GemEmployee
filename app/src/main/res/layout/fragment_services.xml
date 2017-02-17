@@ -12,7 +12,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="150dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/bg_parent_rounded_corner"
+            android:padding="@dimen/activity_horizontal_margin"
             android:gravity="center">
 
 
