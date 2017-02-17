@@ -59,7 +59,7 @@ public class Completed_complaints_Adapter extends BaseAdapter {
         HashMap<String, String> result = new HashMap<String, String>();
         result = data.get(position);
 
-        comp_no.setText(result.get(Services_Tab_CompletedComplaints.TAG_ID));
+        comp_no.setText(result.get(Services_Tab_CompletedComplaints.TAG_COMP_NO));
         cus_name.setText(result.get(Services_Tab_CompletedComplaints.TAG_CUSTOMER));
         comp_status.setText(result.get(Services_Tab_CompletedComplaints.TAG_STATUS));
 

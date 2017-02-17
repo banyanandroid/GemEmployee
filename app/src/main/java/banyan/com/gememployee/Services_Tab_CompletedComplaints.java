@@ -69,7 +69,7 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
     public static final String TAG_ADDON_EMAIL = "addon_email";
     public static final String TAG_FAX = "fax";
     public static final String TAG_COMPAINT = "nature_of_complaints";
-    public static final String TAG_SER_ENG_CODE = "ser_eng_code";
+    public static final String TAG_SER_ENG_CODE = "service_engineer_allotment";
     public static final String TAG_COMP_ATTEND_DATE = "comp_attending_date";
     public static final String TAG_COMP_CLOSING_DATE = "comp_closing_date";
     public static final String TAG_STATUS = "status";
@@ -140,6 +140,8 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
+                System.out.println("Clicked Chika");
+
                 String str_select_id = complaint_list.get(position).get(TAG_ID);
                 String str_select_user_code = complaint_list.get(position).get(TAG_USER_CODE);
                 String str_select_comp_number = complaint_list.get(position).get(TAG_COMP_NO);
@@ -172,8 +174,12 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
                 String str_select_call_attending_time = complaint_list.get(position).get(TAG_ATTENDCALL_TIMESTAMP);
                 String str_select_call_closing_time = complaint_list.get(position).get(TAG_CALL_CLOSING_TIMESTAMP);
 
+
+                System.out.println("Clicked Chika str_select_status" + str_select_status);
+                System.out.println("Clicked Chika str_select_comp_reg_time" + str_select_comp_reg_time);
+
                 SharedPreferences sharedPreferences = PreferenceManager
-                        .getDefaultSharedPreferences(Services_Tab_CompletedComplaints.this);
+                        .getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("str_select_id", str_select_id);
                 editor.putString("str_select_user_code", str_select_user_code);
@@ -209,8 +215,8 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
 
                 editor.commit();
 
-                /*Intent i = new Intent(getActivity(), Activity_MySche_Description.class);
-                startActivity(i);*/
+                Intent i = new Intent(getApplicationContext(), Activity_Completed_complaints_description.class);
+                startActivity(i);
             }
 
         });
@@ -240,7 +246,7 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
 
     private void Function_GetCompleted_jobs() {
 
-        String str_url = "http://gemservice.in/employee_app/2017_WebService.php?operation=Complaints_completed&code=" + str_user_id + "&first=1&last=100";
+        String str_url = "http://gemservice.in/employee_app/2017_Webservice.php?operation=Complaints_completed&code=1003&first=1&last=100";
 
         StringRequest request = new StringRequest(Request.Method.GET,
                 str_url, new Response.Listener<String>() {
@@ -354,7 +360,6 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                pDialog.hide();
                 TastyToast.makeText(getApplicationContext(), "Something Went Wrong Buddy", TastyToast.LENGTH_LONG, TastyToast.ERROR);
                 swipeRefreshLayout.setRefreshing(false);
             }

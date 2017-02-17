@@ -29,7 +29,7 @@ import banyan.com.gememployee.global.AppConfig;
 import banyan.com.gememployee.global.SessionManager;
 
 /**
- * Created by User on 2/8/2017.
+ * Created by Jo on 2/8/2017.
  */
 
 public class Activity_Login extends Activity {
@@ -98,7 +98,7 @@ public class Activity_Login extends Activity {
 
     private void Function_Authentication() {
 
-        String str_url = "http://gemservice.in/employee_app/2017_webservice.php?operation=login" + "&username=" + user_name + "&password=" + user_password;
+        String str_url = "http://gemservice.in/employee_app/2017_Webservice.php?operation=login" + "&username=" + user_name + "&password=" + user_password;
 
         System.out.println("Final URL : " + str_url);
 
