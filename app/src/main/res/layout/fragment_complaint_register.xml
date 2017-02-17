@@ -242,6 +242,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:background="@drawable/bg_parent_rounded_corner"
+                        android:focusable="true"
+                        android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textSize="16dp" />
@@ -252,6 +254,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/bg_parent_rounded_corner"
+                        android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textSize="16dp" />
@@ -262,6 +265,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/bg_parent_rounded_corner"
+                        android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textSize="16dp" />
@@ -289,7 +293,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Warranty Status"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -313,7 +317,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Company Name"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -337,7 +341,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address (City)"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -361,7 +365,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address (Street)"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -385,7 +389,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address (Land Mark)"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -409,7 +413,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Contact Person Name"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
+                        android:maxLength="10"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -433,7 +438,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Phone Number"
-                        android:inputType="text"
+                        android:inputType="phone"
+                        android:maxLength="10"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -457,7 +463,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Add on Phone Number"
-                        android:inputType="text"
+                        android:inputType="phone"
+                        android:maxLength="10"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -505,7 +512,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="E-Mail"
-                        android:inputType="text"
+                        android:inputType="textEmailAddress"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -529,7 +536,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Add on E-Mail"
-                        android:inputType="text"
+                        android:inputType="textEmailAddress"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 

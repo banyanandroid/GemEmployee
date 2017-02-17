@@ -30,8 +30,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,6 +137,15 @@ public class Fragment_ComplaintRegister extends Fragment {
         str_send_user_id = user.get(SessionManager.KEY_USER_ID);
 
 
+        /********************************
+         *  Load Current Day
+         * *********************************/
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd / MM / yyyy");
+        String strDate = mdformat.format(calendar.getTime());
+        txt_date.setText(""+strDate);
+
         /*******************************
          *  Spinner Loaders
          * ******************************/
@@ -157,7 +168,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                     TastyToast.makeText(getActivity(), "Please Select Product", TastyToast.LENGTH_LONG, TastyToast.INFO);
 
-                } else if (str_selected_product.equals("Dryer")) {
+                } else if (str_selected_product.equals("DRYER")) {
 
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"NXG", "2KD", "2KD7", "2KW", "RAD", "HLN", "HLD", "SPD"};
@@ -167,16 +178,16 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_product_model.setAdapter(adapter_product_type);
 
                     // Complaint Type Loader
-                    Arraylist_complaint_type = new String[]{"Autodrain Not opening/fully open", "Air Leak/Air pr.drop"
-                            , "Compressor not running", "Electrical Related Issues", "Evaporater / Heat Exchanger Failure", "Fan Motor  not running"
-                            , "Gas leakage/ LP Open", "High  / Low Dew Point/Moisture in line", "Noise/Vibration", "Performance Issues", "Tem.controller / PLC failure"
-                            , "Trip  (OLR, SPP, MCB, LP, HP, LOW WATER)", "Others"};
+                    Arraylist_complaint_type = new String[]{"AUTODRAIN NOT OPENING/FULLY OPEN", "AIR LEAK/AIR PR.DROP"
+                            , "COMPRESSOR NOT RUNNING", "ELECTRICAL RELATED ISSUES", "EVAPORATER / HEAT EXCHANGER FAILURE", "FAN MOTOR  NOT RUNNING"
+                            , "GAS LEAKAGE/ LP OPEN", "HIGH  / LOW DEW POINT/MOISTURE IN LINE", "NOISE/VIBRATION", "PERFORMANCE ISSUES", "TEM.CONTROLLER / PLC FAILURE"
+                            , "TRIP  (OLR, SPP, MCB, LP, HP, LOW WATER)", "OTHERS"};
                     List<String> compaint_type = new ArrayList<String>(Arrays.asList(Arraylist_complaint_type));
                     ArrayAdapter<String> adapter_compaint_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, compaint_type);
                     adapter_compaint_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_complaint_type.setAdapter(adapter_compaint_type);
 
-                } else if (str_selected_product.equals("Chiller")) {
+                } else if (str_selected_product.equals("CHILLER")) {
 
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"CHILLER"};
@@ -186,15 +197,15 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_product_model.setAdapter(adapter_product_type);
 
                     // Complaint Type Loader
-                    Arraylist_complaint_type = new String[]{"AFT / PHE Failure", "Compressor Failure", "Electrical Failure", "Fan Motor  Failure"
-                            , "Flow Switch Failure", "FRP Tank Leakage", "Gas leakage", "high /Low pressure switch failure", "Noise", "Performance Issues", "Pump Failure"
-                            , "Tem.controller / PLC failure", "Transit", "Trip  (OLR, SPP, MCB, LOW WATER)", "Others"};
+                    Arraylist_complaint_type = new String[]{"AFT / PHE FAILURE", "COMPRESSOR FAILURE", "ELECTRICAL FAILURE", "FAN MOTOR  FAILURE"
+                            , "FLOW SWITCH FAILURE", "FRP TANK LEAKAGE", "GAS LEAKAGE", "HIGH /LOW PRESSURE SWITCH FAILURE", "NOISE", "PERFORMANCE ISSUES", "PUMP FAILURE"
+                            , "TEM.CONTROLLER / PLC FAILURE", "TRANSIT", "TRIP  (OLR, SPP, MCB, LOW WATER)", "OTHERS"};
                     List<String> compaint_type = new ArrayList<String>(Arrays.asList(Arraylist_complaint_type));
                     ArrayAdapter<String> adapter_compaint_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, compaint_type);
                     adapter_compaint_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_complaint_type.setAdapter(adapter_compaint_type);
 
-                } else if (str_selected_product.equals("Cooling Tower")) {
+                } else if (str_selected_product.equals("COOLING TOWER")) {
 
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"GCT +", "GCT", "SCT/SCB", "DRY COOLING TOWER"};
@@ -204,13 +215,13 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_product_model.setAdapter(adapter_product_type);
 
                     // Complaint Type Loader
-                    Arraylist_complaint_type = new String[]{"Leak", "Fan Damage", "Motor Failure", "Noise/Vibration", "Performance Issues", "Spinkler Failure", "Others"};
+                    Arraylist_complaint_type = new String[]{"LEAK", "FAN DAMAGE", "MOTOR FAILURE", "NOISE/VIBRATION", "PERFORMANCE ISSUES", "SPINKLER FAILURE", "OTHERS"};
                     List<String> compaint_type = new ArrayList<String>(Arrays.asList(Arraylist_complaint_type));
                     ArrayAdapter<String> adapter_compaint_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, compaint_type);
                     adapter_compaint_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_complaint_type.setAdapter(adapter_compaint_type);
 
-                } else if (str_selected_product.equals("Others")) {
+                } else if (str_selected_product.equals("OTHERS")) {
 
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"SMALL PRODUCTS"};
@@ -220,7 +231,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_product_model.setAdapter(adapter_product_type);
 
                     // Complaint Type Loader
-                    Arraylist_complaint_type = new String[]{"On Call"};
+                    Arraylist_complaint_type = new String[]{"ON CALLS"};
                     List<String> compaint_type = new ArrayList<String>(Arrays.asList(Arraylist_complaint_type));
                     ArrayAdapter<String> adapter_compaint_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, compaint_type);
                     adapter_compaint_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -354,7 +365,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else {
 
-                    Arraylist_complaint_category = new String[]{"On calls"};
+                    Arraylist_complaint_category = new String[]{"ON CALLS"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -741,6 +752,20 @@ public class Fragment_ComplaintRegister extends Fragment {
                         pDialog.hide();
                         try {
 
+                            edt_mc1.setText("");
+                            edt_mc2.setText("");
+                            edt_mc3.setText("");
+                            edt_warranty_Status.setText("");
+                            edt_companyname.setText("");
+                            edt_city.setText("");
+                            edt_street.setText("");
+                            edt_landmark.setText("");
+                            edt_contact_person_name.setText("");
+                            edt_phone_no.setText("");
+                            edt_addon_phone.setText("");
+                            edt_customer_cellno.setText("");
+                            edt_email.setText("");
+                            edt_addon_email.setText("");
 
                         } catch (Exception e) {
                             // TODO: handle exception

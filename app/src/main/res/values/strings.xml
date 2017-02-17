@@ -4,10 +4,10 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="product_type">
-        <item>Dryer</item>
-        <item>Chiller</item>
-        <item>Cooling Tower</item>
-        <item>Others</item>
+        <item>DRYER</item>
+        <item>CHILLER</item>
+        <item>COOLING TOWER</item>
+        <item>OTHERS</item>
     </string-array>
 
 </resources>
