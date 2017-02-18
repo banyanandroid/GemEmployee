@@ -29,6 +29,9 @@
             android:name=".Activity_Completed_complaints_description"
             android:label="Completed Complaints"></activity>
         <activity
+            android:name=".Activity_Pending_complaints_description"
+            android:label="Pending Complaints"></activity>
+        <activity
             android:name=".Reports_Tab_All"
             android:label="ALL Reports"></activity>
         <activity

@@ -11,7 +11,7 @@ import android.widget.TextView;
  * Created by Jo on 2/17/2017.
  */
 
-public class Activity_Completed_complaints_description extends AppCompatActivity {
+public class Activity_Pending_complaints_description extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
@@ -70,37 +70,36 @@ public class Activity_Completed_complaints_description extends AppCompatActivity
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
 
-        str_id = sharedPreferences.getString("str_select_id", "str_select_id");
-        str_user_code = sharedPreferences.getString("str_select_user_code", "str_select_user_code");
-        str_comp_number = sharedPreferences.getString("str_select_comp_number", "str_select_comp_number");
-        str_date = sharedPreferences.getString("str_select_date", "str_select_date");
-        str_product_name = sharedPreferences.getString("str_select_product_name", "str_select_product_name");
-        str_model = sharedPreferences.getString("str_select_model", "str_select_model");
-        str_comp_cate = sharedPreferences.getString("str_select_comp_cate", "str_select_comp_cate");
-        str_comp_type = sharedPreferences.getString("str_select_comp_type", "str_select_comp_type");
-        str_purchased_throug = sharedPreferences.getString("str_select_purchased_throug", "str_select_purchased_throug");
-        str_mcslno = sharedPreferences.getString("str_select_mcslno", "str_select_mcslno");
-        str_warranty = sharedPreferences.getString("str_select_warranty", "str_select_warranty");
-        str_customer_name = sharedPreferences.getString("str_select_customer_name", "str_select_customer_name");
-        str_address = sharedPreferences.getString("str_select_address", "str_select_address");
-        str_street = sharedPreferences.getString("str_select_street", "str_select_street");
-        str_landmark = sharedPreferences.getString("str_select_landmark", "str_select_landmark");
-        str_city = sharedPreferences.getString("str_select_city", "str_select_city");
-        str_contact_person_name = sharedPreferences.getString("str_select_contact_person_name", "str_select_contact_person_name");
-        str_phone_no = sharedPreferences.getString("str_select_phone_no", "str_select_phone_no");
-        str_addon_phone_no = sharedPreferences.getString("str_select_addon_phone_no", "str_select_addon_phone_no");
-        str_cellno = sharedPreferences.getString("str_select_cellno", "str_select_cellno");
-        str_email = sharedPreferences.getString("str_select_email", "str_select_email");
-        str_addon_email = sharedPreferences.getString("str_select_addon_email", "str_select_addon_email");
-        str_fax_no = sharedPreferences.getString("str_select_fax_no", "str_select_fax_no");
-        str_complaint = sharedPreferences.getString("str_select_complaint", "str_select_complaint");
-        str_engineer_alloted = sharedPreferences.getString("str_select_engineer_alloted", "str_select_engineer_alloted");
-        str_comp_attending_date = sharedPreferences.getString("str_select_comp_attending_date", "str_select_comp_attending_date");
-        str_comp_closing_date = sharedPreferences.getString("str_select_comp_closing_date", "str_select_comp_closing_date");
-        str_status = sharedPreferences.getString("str_select_status", "str_select_status");
-        str_comp_reg_time = sharedPreferences.getString("str_select_comp_reg_time", "str_select_comp_reg_time");
-        str_call_attending_time = sharedPreferences.getString("str_select_call_attending_time", "str_select_call_attending_time");
-        str_call_closing_time = sharedPreferences.getString("str_select_call_closing_time", "str_select_call_closing_time");
+        str_id = sharedPreferences.getString("str_pending_select_id", "str_pending_select_id");
+        str_user_code = sharedPreferences.getString("str_pending_select_user_code", "str_pending_select_user_code");
+        str_comp_number = sharedPreferences.getString("str_pending_select_comp_number", "str_pending_select_comp_number");
+        str_date = sharedPreferences.getString("str_pending_select_date", "str_pending_select_date");
+        str_product_name = sharedPreferences.getString("str_pending_select_product_name", "str_pending_select_product_name");
+        str_model = sharedPreferences.getString("str_pending_select_model", "str_pending_select_model");
+        str_comp_cate = sharedPreferences.getString("str_pending_select_comp_cate", "str_pending_select_comp_cate");
+        str_comp_type = sharedPreferences.getString("str_pending_select_comp_type", "str_pending_select_comp_type");
+        str_purchased_throug = sharedPreferences.getString("str_pending_select_purchased_throug", "str_pending_select_purchased_throug");
+        str_mcslno = sharedPreferences.getString("str_pending_select_mcslno", "str_pending_select_mcslno");
+        str_warranty = sharedPreferences.getString("str_pending_select_warranty", "str_pending_select_warranty");
+        str_customer_name = sharedPreferences.getString("str_pending_select_customer_name", "str_pending_select_customer_name");
+        str_address = sharedPreferences.getString("str_pending_select_address", "str_pending_select_address");
+        str_street = sharedPreferences.getString("str_pending_select_street", "str_pending_select_street");
+        str_landmark = sharedPreferences.getString("str_pending_select_landmark", "str_pending_select_landmark");
+        str_city = sharedPreferences.getString("str_pending_select_city", "str_pending_select_city");
+        str_contact_person_name = sharedPreferences.getString("str_pending_select_contact_person_name", "str_pending_select_contact_person_name");
+        str_phone_no = sharedPreferences.getString("str_pending_select_phone_no", "str_pending_select_phone_no");
+        str_addon_phone_no = sharedPreferences.getString("str_pending_select_addon_phone_no", "str_pending_select_addon_phone_no");
+        str_cellno = sharedPreferences.getString("str_pending_select_cellno", "str_pending_select_cellno");
+        str_email = sharedPreferences.getString("str_pending_select_email", "str_pending_select_email");
+        str_addon_email = sharedPreferences.getString("str_pending_select_addon_email", "str_pending_select_addon_email");
+        str_fax_no = sharedPreferences.getString("str_pending_select_fax_no", "str_pending_select_fax_no");
+        str_complaint = sharedPreferences.getString("str_pending_select_complaint", "str_pending_select_complaint");
+        str_engineer_alloted = sharedPreferences.getString("str_pending_select_engineer_alloted", "str_pending_select_engineer_alloted");
+        str_comp_attending_date = sharedPreferences.getString("str_pending_select_comp_attending_date", "str_pending_select_comp_attending_date");
+        str_comp_closing_date = sharedPreferences.getString("str_pending_select_comp_closing_date", "str_pending_select_comp_closing_date");
+        str_status = sharedPreferences.getString("str_pending_select_status", "str_pending_select_status");
+        str_comp_reg_time = sharedPreferences.getString("str_pending_select_comp_reg_time", "str_pending_select_comp_reg_time");
+
 
         System.out.println("GET VALUE str_status : " + str_status);
         System.out.println("GET VALUE str_comp_reg_time : " + str_comp_reg_time);
