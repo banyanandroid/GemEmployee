@@ -216,7 +216,7 @@ public class Services_Tab_PendingOngoing extends AppCompatActivity implements Sw
 
                 editor.commit();
 
-                Intent i = new Intent(getApplicationContext(), Activity_Completed_complaints_description.class);
+                Intent i = new Intent(getApplicationContext(), Activity_Pending_complaints_description.class);
                 startActivity(i);
             }
 

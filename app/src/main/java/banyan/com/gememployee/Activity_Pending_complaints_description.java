@@ -1,10 +1,13 @@
 package banyan.com.gememployee;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -14,6 +17,8 @@ import android.widget.TextView;
 public class Activity_Pending_complaints_description extends AppCompatActivity {
 
     private Toolbar mToolbar;
+
+    Button btn_proceed;
 
     String str_id, str_user_code, str_comp_number, str_date, str_product_name, str_model, str_comp_cate, str_comp_type, str_purchased_throug, str_mcslno,
             str_warranty, str_customer_name, str_address, str_street, str_landmark, str_city, str_contact_person_name, str_phone_no, str_addon_phone_no,
@@ -28,13 +33,12 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_completed_complaints_description);
+        setContentView(R.layout.activity_pending_complaints_description);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        System.out.println("Just in");
 
         txt_date = (TextView) findViewById(R.id.complaint_des_txtview_date);
         txt_comp_number = (TextView) findViewById(R.id.complaint_des_txtview_comp_number);
@@ -66,6 +70,8 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
         txt_comp_reg_time = (TextView) findViewById(R.id.complaint_des_txtview_comp_reg_time);
         txt_call_attending_time = (TextView) findViewById(R.id.complaint_des_txtview_call_attending_time);
         txt_call_closing_time = (TextView) findViewById(R.id.complaint_des_txtview_call_closing_time);
+
+        btn_proceed = (Button) findViewById(R.id.pending_complaint_btn_submit);
 
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
@@ -104,6 +110,21 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
         System.out.println("GET VALUE str_status : " + str_status);
         System.out.println("GET VALUE str_comp_reg_time : " + str_comp_reg_time);
 
+        btn_proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                System.out.println("Just in Clicked");
+
+                Intent i = new Intent(getApplicationContext(), Activity_Pending_Complaint_Update.class);
+                startActivity(i);
+
+                System.out.println("Just in Done");
+
+            }
+        });
+
+
         try {
             txt_user_code.setText(str_user_code);
             txt_comp_number.setText(str_comp_number);
@@ -128,7 +149,6 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
             txt_addon_email.setText(str_addon_email);
             txt_fax.setText(str_fax_no);
             txt_complaint.setText(str_complaint);
-            System.out.println("TEST LEVEL STATUS" + str_status);
             txt_status.setText(str_status);
             txt_comp_reg_time.setText(str_comp_reg_time);
             txt_engg_alloted.setText(str_engineer_alloted);
@@ -141,7 +161,6 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
         } catch (Exception e) {
 
         }
-
     }
 
 }

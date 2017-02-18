@@ -33,7 +33,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="Complaint Date"
+                    android:text="Pending Complaint Date"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -896,7 +896,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -921,6 +920,28 @@
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/pending_complaint_btn_submit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_weight="2"
+                    android:background="@color/colorAccent"
+                    android:text="Goahead"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 

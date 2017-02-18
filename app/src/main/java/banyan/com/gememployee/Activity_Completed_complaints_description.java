@@ -1,10 +1,13 @@
 package banyan.com.gememployee;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -25,6 +28,8 @@ public class Activity_Completed_complaints_description extends AppCompatActivity
             txt_cellno, txt_email, txt_addon_email, txt_fax, txt_complaint, txt_engg_alloted, txt_comp_attending_date, txt_comp_closing_date, txt_closing_date, txt_status,
             txt_comp_reg_time, txt_call_attending_time, txt_call_closing_time;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +37,6 @@ public class Activity_Completed_complaints_description extends AppCompatActivity
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         txt_date = (TextView) findViewById(R.id.complaint_des_txtview_date);
         txt_comp_number = (TextView) findViewById(R.id.complaint_des_txtview_comp_number);
@@ -66,6 +68,8 @@ public class Activity_Completed_complaints_description extends AppCompatActivity
         txt_comp_reg_time = (TextView) findViewById(R.id.complaint_des_txtview_comp_reg_time);
         txt_call_attending_time = (TextView) findViewById(R.id.complaint_des_txtview_call_attending_time);
         txt_call_closing_time = (TextView) findViewById(R.id.complaint_des_txtview_call_closing_time);
+
+
 
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());

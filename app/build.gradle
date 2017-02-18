@@ -29,4 +29,5 @@ dependencies {
     compile 'com.android.support:design:25.1.1'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'     //Volley
     compile 'com.sdsmdg.tastytoast:tastytoast:0.0.1'    //Alert Toast
+    compile 'com.haozhang.libary:android-animated-recording-view:1.0'   //Voice Wave
 }
