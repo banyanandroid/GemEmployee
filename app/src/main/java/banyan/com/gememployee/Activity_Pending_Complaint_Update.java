@@ -151,6 +151,8 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                System.out.println("IMA : " + encodedstring);
+
                if (encodedstring.equals("")){
 
                }else {
@@ -362,7 +364,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
                 // successfully captured the image
                 // launching upload activity
-                launchUploadActivity(true);
+               launchUploadActivity(true);
 
 
             } else if (resultCode == Activity_Pending_Complaint_Update.this.RESULT_CANCELED) {
@@ -433,25 +435,34 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
         imagepath1 = fileUri.getPath();
 
-        Bitmap bm;
 
         BitmapFactory.Options options = new BitmapFactory.Options();
 
         // options.inSampleSize = 6;
 
-        bm = BitmapFactory.decodeFile(imagepath1, options);
-
-        bm = Bitmap.createScaledBitmap(bm, 170, 170, true);
-
-
-        img_post_image.setImageBitmap(bm);
-
-
+       /* bm = BitmapFactory.decodeFile(imagepath1, options);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 25, stream);
         byte[] byte_arr = stream.toByteArray();
+        bm = Bitmap.createScaledBitmap(bm, 170, 170, true);
+        img_post_image.setImageBitmap(bm);
         // Encode Image to String
        encodedstring = Base64.encodeToString(byte_arr, 0);
+*/
+        // Image location URL
+        imagepath1 = fileUri.getPath();
+        Log.e("path", "----------------" + imagepath1);
+
+        // Image
+        Bitmap bmBitmap = BitmapFactory.decodeFile(imagepath1);
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        bmBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+        byte[] ba = bao.toByteArray();
+        encodedstring = Base64.encodeToString(ba, 0);
+        img_post_image.setImageBitmap(bmBitmap);
+        Log.e("base64", "-----" + encodedstring);
+
+
     }
 
     /* * ------------ Helper Methods ----------------------*/
@@ -541,6 +552,8 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
         String str_register_complaint = "http://gemservice.in/employee_app/upload_image.php";
 
+        File source = new File(imagepath1);
+
         StringRequest request = new StringRequest(Request.Method.POST,
                 str_register_complaint, new Response.Listener<String>() {
 
@@ -589,7 +602,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("image", imagepath1);
+                params.put("image", encodedstring);
 
                 return params;
             }
