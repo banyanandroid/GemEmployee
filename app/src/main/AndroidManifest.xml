@@ -38,6 +38,7 @@
             android:label="Pending Complaints"></activity>
         <activity
             android:name=".Activity_Pending_Complaint_Update"
+            android:screenOrientation="portrait"
             android:label="Complaint Process"></activity>
         <activity
             android:name=".Reports_Tab_All"
@@ -56,7 +57,11 @@
             android:label="Pre-Commisioning / Commisioning"></activity>
         <activity
             android:name=".Reports_Tab_AMC"
-            android:label="AMC"></activity>
+            android:label="AMC"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
     </application>
 

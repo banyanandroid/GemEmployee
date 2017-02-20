@@ -30,4 +30,5 @@ dependencies {
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'     //Volley
     compile 'com.sdsmdg.tastytoast:tastytoast:0.0.1'    //Alert Toast
     compile 'com.haozhang.libary:android-animated-recording-view:1.0'   //Voice Wave
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }

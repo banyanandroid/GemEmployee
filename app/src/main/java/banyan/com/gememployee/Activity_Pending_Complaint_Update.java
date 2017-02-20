@@ -2,6 +2,7 @@ package banyan.com.gememployee;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,13 +19,30 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.haozhang.lib.AnimatedRecordingView;
+import com.sdsmdg.tastytoast.TastyToast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -32,7 +50,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
 /**
@@ -69,9 +89,19 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
     private final static int RESULT_LOAD_IMAGE = 3;
     private static final int REQUEST_CAMERA1 = 4;
 
+    private static final String TAG_NAME = "name";
+    ProgressDialog pDialog;
+    public static RequestQueue queue;
+
     Uri photoPath, mImageUri;
+    String encodedstring;
 
     private Uri fileUri;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +151,20 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(), imagepath1, Toast.LENGTH_LONG).show();
-                System.out.println("SETTT GOT IT" + imagepath1);
+               if (encodedstring.equals("")){
+
+               }else {
+                   try {
+                       pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
+                       pDialog.setMessage("Please wait...");
+                       pDialog.show();
+                       pDialog.setCancelable(false);
+                       queue = Volley.newRequestQueue(Activity_Pending_Complaint_Update.this);
+                       Register_Complaint();
+                   } catch (Exception e) {
+
+                   }
+               }
             }
         });
 
@@ -135,6 +177,9 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
         // start finished animation
       //  mRecordingView.stop();*/
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public void Check_Permission() {
@@ -354,7 +399,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                 bm = Bitmap.createScaledBitmap(bm, 170, 170, true);
                 img_post_image.setImageBitmap(bm);
 
-                String path = android.os.Environment
+                String path = Environment
                         .getExternalStorageDirectory()
                         + File.separator
                         + "Phoenix" + File.separator + "default";
@@ -400,6 +445,13 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
 
         img_post_image.setImageBitmap(bm);
+
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 25, stream);
+        byte[] byte_arr = stream.toByteArray();
+        // Encode Image to String
+       encodedstring = Base64.encodeToString(byte_arr, 0);
     }
 
     /* * ------------ Helper Methods ----------------------*/
@@ -442,6 +494,110 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
         }
 
         return mediaFile;
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Activity_Pending_Complaint_Update Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
+    }
+
+
+    /***************************************
+     *  Function upload Image
+     * ************************************/
+
+    private void Register_Complaint() {
+
+        String str_register_complaint = "http://gemservice.in/employee_app/upload_image.php";
+
+        StringRequest request = new StringRequest(Request.Method.POST,
+                str_register_complaint, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG_NAME, response.toString());
+                Log.d("Complaint_Number", response.toString());
+
+                TastyToast.makeText(Activity_Pending_Complaint_Update.this, response.toString(), TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    int success = obj.getInt("success");
+
+                    System.out.println("REG" + success);
+
+                    if (success == 1) {
+
+                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Posted Successfully :)", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                        pDialog.hide();
+
+
+                    } else {
+
+                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Something Went Wrong :(", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                        pDialog.hide();
+
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+
+                pDialog.hide();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.hide();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("image", imagepath1);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        queue.add(request);
     }
 
 }
