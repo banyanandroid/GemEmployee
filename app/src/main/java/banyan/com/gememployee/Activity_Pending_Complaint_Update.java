@@ -9,9 +9,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -24,6 +27,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -43,11 +47,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -64,14 +74,17 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
     private Toolbar mToolbar;
     AnimatedRecordingView mRecordingView;
     ImageView img_post_image;
-    Button btn_submit;
+    TextView txt_audname;
+    Button btn_submit, upload_btn_stop_record;
     float vol;
 
     String str_function = "";
     String imagepath1 = "";
 
 
-    //18-2-17 *** 11:46 pm
+    /*************************************
+     * For Image Capture
+     *****************************************/
 
     private static final int PERMISSION_CALLBACK_CONSTANT = 100;
     private static final int REQUEST_PERMISSION_SETTING = 101;
@@ -94,14 +107,26 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
     public static RequestQueue queue;
 
     Uri photoPath, mImageUri;
-    String encodedstring;
+    String encodedstring = "";
 
     private Uri fileUri;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+
     private GoogleApiClient client;
+
+    /*************************************
+     * For Audio Capture
+     *****************************************/
+
+    private static final String AUDIO_RECORDER_FILE_EXT_3GP = ".mp4";
+    private static final String AUDIO_RECORDER_FILE_EXT_MP4 = ".3gp";
+    private static final String AUDIO_RECORDER_FOLDER = "AudioRecorder";
+    private MediaRecorder recorder = null;
+    private int currentFormat = 0;
+    private int output_formats[] = {MediaRecorder.OutputFormat.MPEG_4, MediaRecorder.OutputFormat.THREE_GPP};
+    private String file_exts[] = {AUDIO_RECORDER_FILE_EXT_MP4, AUDIO_RECORDER_FILE_EXT_3GP};
+
+    String str_audio_path = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,13 +136,23 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        // 18-2-17
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
 
         permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
 
         img_post_image = (ImageView) findViewById(R.id.complaintupdate_img_post);
         btn_submit = (Button) findViewById(R.id.complaint_pending_update);
         mRecordingView = (AnimatedRecordingView) findViewById(R.id.recording);
+        upload_btn_stop_record = (Button) findViewById(R.id.upload_btn_stop_record);
+        txt_audname = (TextView) findViewById(R.id.upload_txt_aud_name);
+
+        /*************************************
+         * Runtime Permission call
+         * *****************************************/
 
         try {
             Check_Permission();
@@ -129,9 +164,12 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                str_function = "image";
-                proceedAfterPermission();
-
+                if (imagepath1.equals("")) {
+                    str_function = "image";
+                    proceedAfterPermission();
+                } else {
+                    TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Img is already is der", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                }
 
             }
         });
@@ -140,10 +178,36 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                str_function = "image";
+                if (str_audio_path.equals("")) {
+                    try {
+                        str_function = "audio";
+                        mRecordingView.start();
+                        mRecordingView.loading();
+                        proceedAfterPermission();
 
-                mRecordingView.start();
-                mRecordingView.loading();
+                    } catch (Exception e) {
+
+                    }
+                } else {
+                    TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Aud is already is der", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                }
+
+            }
+        });
+
+        upload_btn_stop_record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    mRecordingView.stop();
+                    stopRecording();
+                    upload_btn_stop_record.setVisibility(View.GONE);
+                    txt_audname.setVisibility(View.VISIBLE);
+                    txt_audname.setText(""+str_audio_path);
+                } catch (Exception e) {
+
+                }
             }
         });
 
@@ -152,21 +216,41 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
             public void onClick(View v) {
 
                 System.out.println("IMA : " + encodedstring);
+                System.out.println("AUD : " + str_audio_path);
 
-               if (encodedstring.equals("")){
+                if (encodedstring.equals("")) {
+                    TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Capture an Image", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                } else if (str_audio_path.equals("")) {
+                    TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Capture a Audio", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                } else {
 
-               }else {
-                   try {
-                       pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
-                       pDialog.setMessage("Please wait...");
-                       pDialog.show();
-                       pDialog.setCancelable(false);
-                       queue = Volley.newRequestQueue(Activity_Pending_Complaint_Update.this);
-                       Register_Complaint();
-                   } catch (Exception e) {
+                    try {
+                        pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
+                        pDialog.setMessage("Please wait...");
+                        pDialog.show();
+                        pDialog.setCancelable(false);
+                        queue = Volley.newRequestQueue(Activity_Pending_Complaint_Update.this);
+                        Register_Complaint();
+                    } catch (Exception e) {
 
-                   }
-               }
+                    }
+
+                }
+
+                /*if (encodedstring.equals("")){
+
+                }else {
+                    try {
+                        pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
+                        pDialog.setMessage("Please wait...");
+                        pDialog.show();
+                        pDialog.setCancelable(false);
+                        queue = Volley.newRequestQueue(Activity_Pending_Complaint_Update.this);
+                        Register_Complaint();
+                    } catch (Exception e) {
+
+                    }
+                }*/
             }
         });
 
@@ -183,6 +267,10 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
+    /*************************************
+     * Runtime Permission call
+     *****************************************/
 
     public void Check_Permission() {
 
@@ -319,16 +407,29 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
             if (imagepath1.equals("")) {
                 Function_capture_Image();
             } else {
-
+                TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Internal Error", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
 
         } else if (str_function.equals("audio")) {
+
+            if (str_audio_path.equals("")) {
+                startRecording();
+                upload_btn_stop_record.setVisibility(View.VISIBLE);
+
+            } else {
+                TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Internal Error", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+
+            }
 
         } else {
 
         }
 
     }
+
+    /*************************************
+     * Image Capture Functio Begins
+     *****************************************/
 
     public void Function_capture_Image() {
 
@@ -364,7 +465,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
                 // successfully captured the image
                 // launching upload activity
-               launchUploadActivity(true);
+                launchUploadActivity(true);
 
 
             } else if (resultCode == Activity_Pending_Complaint_Update.this.RESULT_CANCELED) {
@@ -456,7 +557,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
         // Image
         Bitmap bmBitmap = BitmapFactory.decodeFile(imagepath1);
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        bmBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+        bmBitmap.compress(Bitmap.CompressFormat.JPEG, 25, bao);
         byte[] ba = bao.toByteArray();
         encodedstring = Base64.encodeToString(ba, 0);
         img_post_image.setImageBitmap(bmBitmap);
@@ -545,8 +646,8 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
 
     /***************************************
-     *  Function upload Image
-     * ************************************/
+     * Function upload Image
+     ************************************/
 
     private void Register_Complaint() {
 
@@ -562,10 +663,11 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                 Log.d(TAG_NAME, response.toString());
                 Log.d("Complaint_Number", response.toString());
 
-                TastyToast.makeText(Activity_Pending_Complaint_Update.this, response.toString(), TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-
                 try {
-                    JSONObject obj = new JSONObject(response);
+
+                    doFileUpload();
+
+                    /*JSONObject obj = new JSONObject(response);
                     int success = obj.getInt("success");
 
                     System.out.println("REG" + success);
@@ -581,8 +683,8 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                         TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Something Went Wrong :(", TastyToast.LENGTH_LONG, TastyToast.ERROR);
                         pDialog.hide();
 
-                    }
-                } catch (JSONException e) {
+                    }*/
+                } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
@@ -611,6 +713,164 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
         // Adding request to request queue
         queue.add(request);
+    }
+
+    /**************************************
+     * Function Audio Recording Begins
+     ***********************************/
+
+    private void startRecording() {
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(output_formats[currentFormat]);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        recorder.setOutputFile(getFilename());
+        recorder.setOnErrorListener(errorListener);
+        recorder.setOnInfoListener(infoListener);
+        try {
+            recorder.prepare();
+            recorder.start();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void stopRecording() {
+        if (null != recorder) {
+            recorder.stop();
+            recorder.reset();
+            recorder.release();
+            recorder = null;
+        }
+    }
+
+    private String getFilename() {
+        String filepath = Environment.getExternalStorageDirectory().getPath();
+        File file = new File(filepath, AUDIO_RECORDER_FOLDER);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        System.out.println("path" + file.getAbsolutePath() + "/" + System.currentTimeMillis() + file_exts[currentFormat]);
+        str_audio_path = file.getAbsolutePath() + "/" + System.currentTimeMillis() + file_exts[currentFormat];
+        return (file.getAbsolutePath() + "/" + System.currentTimeMillis() + file_exts[currentFormat]);
+
+    }
+
+    private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
+        @Override
+        public void onError(MediaRecorder mr, int what, int extra) {
+            //  Toast.makeText(MainActivity.this, "Error: " + what + ", " + extra, Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private MediaRecorder.OnInfoListener infoListener = new MediaRecorder.OnInfoListener() {
+        @Override
+        public void onInfo(MediaRecorder mr, int what, int extra) {
+            // Toast.makeText(MainActivity.this, "Warning: " + what + ", " + extra, Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private void doFileUpload() {
+
+        System.out.println("CALLED INSIDE");
+        System.out.println("CALLED INSIDE");
+        System.out.println("CALLED INSIDE");
+        System.out.println("CALLED INSIDE");
+        System.out.println("CALLED INSIDE");
+
+        HttpURLConnection conn = null;
+        DataOutputStream dos = null;
+        DataInputStream inStream = null;
+        String existingFileName = str_audio_path;
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+        String responseFromServer = "";
+        String urlString = "http://gemservice.in/employee_app/2017_upload_audio.php";
+
+        System.out.println("URL : " + urlString);
+
+        try {
+
+            System.out.println("CALLED INSIDE 1");
+
+            //------------------ CLIENT REQUEST
+            FileInputStream fileInputStream = new FileInputStream(new File(existingFileName));
+            // open a URL connection to the Servlet
+            URL url = new URL(urlString);
+            // Open a HTTP connection to the URL
+            conn = (HttpURLConnection) url.openConnection();
+            // Allow Inputs
+            conn.setDoInput(true);
+            // Allow Outputs
+            conn.setDoOutput(true);
+            // Don't use a cached copy.
+            conn.setUseCaches(false);
+            // Use a post method.
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+            conn.setUseCaches(false);
+            dos = new DataOutputStream(conn.getOutputStream());
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"uploadedfile\";filename=\"" + existingFileName + "\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+            // create a buffer of maximum size
+            bytesAvailable = fileInputStream.available();
+            bufferSize = Math.min(bytesAvailable, maxBufferSize);
+            buffer = new byte[bufferSize];
+            // read file and write it into form...167181282
+            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            while (bytesRead > 0) {
+
+                dos.write(buffer, 0, bufferSize);
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            }
+
+            // send multipart form data necesssary after file data...
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+            // close streams
+            Log.e("Debug", "File is written");
+            fileInputStream.close();
+            dos.flush();
+            dos.close();
+
+            TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Posted Successfully :)", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+
+        } catch (MalformedURLException ex) {
+            Log.e("Debug", "error: " + ex.getMessage(), ex);
+        } catch (IOException ioe) {
+            Log.e("Debug", "error: " + ioe.getMessage(), ioe);
+        }
+
+        //------------------ read the SERVER RESPONSE
+        try {
+
+            inStream = new DataInputStream(conn.getInputStream());
+            String str;
+
+            while ((str = inStream.readLine()) != null) {
+
+                Log.e("Debug", "Server Response " + str);
+
+            }
+
+            inStream.close();
+
+        } catch (IOException ioex) {
+            Log.e("Debug", "error: " + ioex.getMessage(), ioex);
+        }
     }
 
 }

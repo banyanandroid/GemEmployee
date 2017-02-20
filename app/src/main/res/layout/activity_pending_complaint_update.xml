@@ -197,14 +197,14 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-               <!-- <ImageView
-                    android:id="@+id/complaintupdate_img_record"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:layout_weight="3"
-                    android:src="@mipmap/ic_recoed_play" />-->
+                <!-- <ImageView
+                     android:id="@+id/complaintupdate_img_record"
+                     android:layout_width="80dp"
+                     android:layout_height="80dp"
+                     android:layout_gravity="center"
+                     android:layout_marginTop="@dimen/activity_vertical_margin"
+                     android:layout_weight="3"
+                     android:src="@mipmap/ic_recoed_play" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -217,7 +217,32 @@
                     <com.haozhang.lib.AnimatedRecordingView
                         android:id="@+id/recording"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="100dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/upload_txt_aud_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="16dp"
+                            android:visibility="gone" />
+
+                        <Button
+                            android:id="@+id/upload_btn_stop_record"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#f44336"
+                            android:text="Stop Record"
+                            android:textColor="@color/white"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
