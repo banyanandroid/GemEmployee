@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         String str_status = "Want to Exit?";
                         FunctionAlert(str_status);
-                    }catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
 
@@ -159,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**************************
-     *  Custom Alert
-     * *********************************/
+     * Custom Alert
+     *********************************/
 
     public void AlertDialogfun() {
         LayoutInflater li = LayoutInflater.from(MainActivity.this);
@@ -184,6 +184,17 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         // show it
         alertDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // your code.
+        try {
+            String str_status = "Want to Exit?";
+            FunctionAlert(str_status);
+        } catch (Exception e) {
+
+        }
     }
 
 }

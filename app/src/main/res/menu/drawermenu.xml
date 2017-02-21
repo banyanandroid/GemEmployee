@@ -10,12 +10,12 @@
 
     <item
         android:id="@+id/nav_item_services"
-        android:icon="@mipmap/ic_service"
+        android:icon="@mipmap/ic_services"
         android:title="Services" />
 
     <item
         android:id="@+id/nav_item_csform"
-        android:icon="@mipmap/ic_service"
+        android:icon="@mipmap/ic_csform"
         android:title="CS Form" />
 
     <item android:title="Others">
@@ -26,12 +26,12 @@
                 android:title="About" />
             <item
                 android:id="@+id/nav_item_logout"
-                android:icon="@mipmap/ic_contact"
+                android:icon="@mipmap/ic_logout"
                 android:title="Logout" />
 
             <item
                 android:id="@+id/nav_item_exit"
-                android:icon="@mipmap/ic_privacy"
+                android:icon="@mipmap/ic_exit"
                 android:title="Exit" />
         </menu>
     </item>
