@@ -1,6 +1,9 @@
 package banyan.com.gememployee;
 
+import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +63,8 @@ public class Fragment_ComplaintRegister extends Fragment {
     EditText edt_mc1, edt_mc2, edt_mc3, edt_warranty_Status, edt_companyname, edt_city, edt_street, edt_landmark,
             edt_contact_person_name, edt_phone_no, edt_addon_phone, edt_customer_cellno, edt_email, edt_addon_email;
 
+    LinearLayout layout_model;
+
     TextView txt_date, txt_complaint_no;
 
     Button btn_reset, btn_submit;
@@ -88,7 +94,6 @@ public class Fragment_ComplaintRegister extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_complaint_register, null);
 
         // TextView
-
         txt_date = (TextView) rootView.findViewById(R.id.complaint_txtview_date);
         txt_complaint_no = (TextView) rootView.findViewById(R.id.complaint_txtview_compno);
 
@@ -117,6 +122,10 @@ public class Fragment_ComplaintRegister extends Fragment {
         edt_email = (EditText) rootView.findViewById(R.id.complaint_edt_email);
         edt_addon_email = (EditText) rootView.findViewById(R.id.complaint_edt_addon_email);
 
+        // Linear Layout
+
+        layout_model = (LinearLayout) rootView.findViewById(R.id.complaint_reg_linear_model);
+
         // Button
 
         btn_reset = (Button) rootView.findViewById(R.id.complaint_btn_reset);
@@ -144,7 +153,7 @@ public class Fragment_ComplaintRegister extends Fragment {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat mdformat = new SimpleDateFormat("dd / MM / yyyy");
         String strDate = mdformat.format(calendar.getTime());
-        txt_date.setText(""+strDate);
+        txt_date.setText("" + strDate);
 
         /*******************************
          *  Spinner Loaders
@@ -170,6 +179,8 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_product.equals("DRYER")) {
 
+                    layout_model.setVisibility(View.VISIBLE);
+
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"NXG", "2KD", "2KD7", "2KW", "RAD", "HLN", "HLD", "SPD"};
                     List<String> produt_type = new ArrayList<String>(Arrays.asList(Arraylist_product_model));
@@ -189,6 +200,8 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_product.equals("CHILLER")) {
 
+                    layout_model.setVisibility(View.GONE);
+
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"CHILLER"};
                     List<String> produt_type = new ArrayList<String>(Arrays.asList(Arraylist_product_model));
@@ -207,6 +220,8 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_product.equals("COOLING TOWER")) {
 
+                    layout_model.setVisibility(View.GONE);
+
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"GCT +", "GCT", "SCT/SCB", "DRY COOLING TOWER"};
                     List<String> produt_type = new ArrayList<String>(Arrays.asList(Arraylist_product_model));
@@ -222,6 +237,8 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_type.setAdapter(adapter_compaint_type);
 
                 } else if (str_selected_product.equals("OTHERS")) {
+
+                    layout_model.setVisibility(View.GONE);
 
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"SMALL PRODUCTS"};
@@ -752,6 +769,8 @@ public class Fragment_ComplaintRegister extends Fragment {
                         pDialog.hide();
                         try {
 
+                            FunctionAlert();
+
                             edt_mc1.setText("");
                             edt_mc2.setText("");
                             edt_mc3.setText("");
@@ -825,6 +844,37 @@ public class Fragment_ComplaintRegister extends Fragment {
 
         // Adding request to request queue
         queue.add(request);
+    }
+
+    /***************************************
+     *  Complaint Registered Alert
+     * ******************************************/
+
+    private void FunctionAlert() {
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle("Gem India")
+                .setMessage("Compaint Registered Successfully :)")
+                .setIcon(R.mipmap.ic_launcher)
+
+                .setPositiveButton("Done",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+
+                                try {
+
+                                    queue = Volley.newRequestQueue(getActivity());
+                                    complaint_no();
+
+                                }catch (Exception e) {
+
+                                }
+
+
+                            }
+                        }).show();
     }
 
 

@@ -14,11 +14,6 @@
         android:title="Services" />
 
     <item
-        android:id="@+id/nav_item_reports"
-        android:icon="@mipmap/ic_service"
-        android:title="Reports" />
-
-    <item
         android:id="@+id/nav_item_csform"
         android:icon="@mipmap/ic_service"
         android:title="CS Form" />

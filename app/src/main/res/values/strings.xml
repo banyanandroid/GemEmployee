@@ -10,4 +10,12 @@
         <item>OTHERS</item>
     </string-array>
 
+    <string-array name="cs_form">
+        <item>Excelent</item>
+        <item>Good</item>
+        <item>Average</item>
+        <item>Poor</item>
+        <item>Not Satisfied</item>
+    </string-array>
+
 </resources>

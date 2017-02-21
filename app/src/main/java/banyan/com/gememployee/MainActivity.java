@@ -1,17 +1,22 @@
 package banyan.com.gememployee;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.HashMap;
+import java.util.function.Function;
 
 import banyan.com.gememployee.global.SessionManager;
 
@@ -78,12 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-                if (menuItem.getItemId() == R.id.nav_item_reports) {
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new Fragment_Reports()).commit();
-
-                }
-
                 if (menuItem.getItemId() == R.id.nav_item_csform) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerView, new Fragment_CSForm()).commit();
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (menuItem.getItemId() == R.id.nav_item_about) {
 
-                    TastyToast.makeText(getApplicationContext(), "About...", TastyToast.LENGTH_LONG, TastyToast.DEFAULT);
+                    AlertDialogfun();
                 }
                 if (menuItem.getItemId() == R.id.nav_item_logout) {
 
@@ -105,7 +104,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (menuItem.getItemId() == R.id.nav_item_exit) {
 
-                    TastyToast.makeText(getApplicationContext(), "Exit...", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                    try {
+                        String str_status = "Want to Exit?";
+                        FunctionAlert(str_status);
+                    }catch (Exception e) {
+
+                    }
+
                 }
 
                 return false;
@@ -126,4 +131,59 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
     }
+
+    private void FunctionAlert(String status) {
+
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("Gem India")
+                .setMessage(status)
+                .setIcon(R.mipmap.ic_launcher)
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+
+                    }
+                })
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                // TODO Auto-generated method stub
+                                // finish();
+                                finish();
+                            }
+                        }).show();
+    }
+
+    /**************************
+     *  Custom Alert
+     * *********************************/
+
+    public void AlertDialogfun() {
+        LayoutInflater li = LayoutInflater.from(MainActivity.this);
+        View promptsView = li.inflate(R.layout.dialog_about_alert, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                MainActivity.this);
+        alertDialogBuilder.setTitle("About");
+        alertDialogBuilder.setIcon(R.drawable.logo);
+        // alertDialogBuilder.setInverseBackgroundForced(#26A65B);
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        alertDialogBuilder.setCancelable(false)
+                .setNeutralButton("Done", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                });
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
+    }
+
 }
