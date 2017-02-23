@@ -136,8 +136,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:gravity="center"
-                android:visibility="gone"
                 android:orientation="horizontal"
+                android:visibility="visible"
                 android:weightSum="2">
 
                 <TextView
@@ -149,18 +149,41 @@
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
-                <EditText
-                    android:id="@+id/complaint_model_no"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_parent_rounded_corner"
-                    android:focusable="true"
-                    android:hint="Model Number"
-                    android:inputType="textCapSentences"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="16dp" />
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/complaint_model_no1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/bg_parent_rounded_corner"
+                        android:focusable="true"
+                        android:hint=""
+                        android:inputType="textCapSentences"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/complaint_model_no"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.7"
+                        android:background="@drawable/bg_parent_rounded_corner"
+                        android:focusable="true"
+                        android:hint="Model Number"
+                        android:inputType="textCapSentences"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -177,7 +200,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="Complaint Category"
+                    android:text="Service Category"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -332,7 +355,7 @@
                         android:id="@+id/complaint_edt_warranty"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Warranty Status"
+                        android:hint="Warranty Status *"
                         android:inputType="textCapSentences"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
@@ -356,7 +379,7 @@
                         android:id="@+id/complaint_edt_company_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Company Name"
+                        android:hint="Company Name *"
                         android:inputType="textCapSentences"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
@@ -380,7 +403,7 @@
                         android:id="@+id/complaint_edt_Address1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address (City)"
+                        android:hint="Address (City) *"
                         android:inputType="textCapSentences"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
@@ -404,7 +427,7 @@
                         android:id="@+id/complaint_edt_Address2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address (Street)"
+                        android:hint="Address (Street) *"
                         android:inputType="textCapSentences"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
@@ -428,8 +451,33 @@
                         android:id="@+id/complaint_edt_Address3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address (Land Mark)"
+                        android:hint="Address (Land Mark) *"
                         android:inputType="textCapSentences"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_parent_rounded_corner">>
+
+                    <EditText
+                        android:id="@+id/complaint_edt_Address4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Pincode *"
+                        android:inputType="phone"
+                        android:maxLength="6"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -452,7 +500,7 @@
                         android:id="@+id/complaint_edt_contact_person"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Contact Person Name"
+                        android:hint="Contact Person Name *"
                         android:inputType="textCapSentences"
                         android:maxLength="10"
                         android:singleLine="true" />
@@ -477,9 +525,59 @@
                         android:id="@+id/complaint_edt_phone_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Phone Number"
+                        android:hint="Phone Number *"
                         android:inputType="phone"
                         android:maxLength="10"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_parent_rounded_corner">>
+
+                    <EditText
+                        android:id="@+id/complaint_edt_customer_cellno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Customer Cell No *"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_parent_rounded_corner">>
+
+                    <EditText
+                        android:id="@+id/complaint_edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="E-Mail *"
+                        android:inputType="textEmailAddress"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -505,54 +603,6 @@
                         android:hint="Add on Phone Number"
                         android:inputType="phone"
                         android:maxLength="10"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_parent_rounded_corner">>
-
-                    <EditText
-                        android:id="@+id/complaint_edt_customer_cellno"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Customer Cell No"
-                        android:inputType="phone"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_parent_rounded_corner">>
-
-                    <EditText
-                        android:id="@+id/complaint_edt_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="E-Mail"
-                        android:inputType="textEmailAddress"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 

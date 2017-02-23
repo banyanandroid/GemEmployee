@@ -60,7 +60,7 @@ public class Fragment_ComplaintRegister extends Fragment {
     // Session Manager Class
     SessionManager session;
 
-    EditText edt_mc1, edt_mc2, edt_mc3, edt_warranty_Status, edt_companyname, edt_city, edt_street, edt_landmark,
+    EditText edt_model, edt_model_number, edt_mc1, edt_mc2, edt_mc3, edt_warranty_Status, edt_companyname, edt_city, edt_street, edt_landmark, edt_pincode,
             edt_contact_person_name, edt_phone_no, edt_addon_phone, edt_customer_cellno, edt_email, edt_addon_email;
 
     LinearLayout layout_model;
@@ -72,9 +72,9 @@ public class Fragment_ComplaintRegister extends Fragment {
     String str_selected_product, str_selected_model, str_selected_complaint_category, str_selected_complaint_type, str_selected_dealer;
     String str_delar, str_complaint_number;
 
-    String str_send_date, str_send_user_id, str_send_complaint_no, str_send_complaint_date, str_send_product_name, str_send_model,
+    String str_send_date, str_send_user_id, str_send_complaint_no, str_send_complaint_date, str_send_product_name, str_send_model, str_send_model_number,
             str_send_complaint_category, str_send_complaint_type, str_send_pur_through, str_Send_mc1, str_send_mc2, str_send_mc3,
-            str_send_warranty_status, str_send_company_name, str_send_address1, str_send_address2, str_send_address3,
+            str_send_warranty_status, str_send_company_name, str_send_address1, str_send_address2, str_send_address3, str_send_address4,
             str_send_contact_person_name, str_send_phone_number, str_send_addon_phone_number, str_send_email, str_send_addon_email;
 
     ArrayList<String> Arraylist_dealers = null;
@@ -106,6 +106,9 @@ public class Fragment_ComplaintRegister extends Fragment {
 
         // Edit Text
 
+        edt_model = (EditText) rootView.findViewById(R.id.complaint_model_no1);
+        edt_model_number = (EditText) rootView.findViewById(R.id.complaint_model_no);
+
         edt_mc1 = (EditText) rootView.findViewById(R.id.complaint_edt_mcsl1);
         edt_mc2 = (EditText) rootView.findViewById(R.id.complaint_edt_mcsl2);
         edt_mc3 = (EditText) rootView.findViewById(R.id.complaint_edt_mcsl3);
@@ -115,6 +118,7 @@ public class Fragment_ComplaintRegister extends Fragment {
         edt_city = (EditText) rootView.findViewById(R.id.complaint_edt_Address1);
         edt_street = (EditText) rootView.findViewById(R.id.complaint_edt_Address2);
         edt_landmark = (EditText) rootView.findViewById(R.id.complaint_edt_Address3);
+        edt_pincode = (EditText) rootView.findViewById(R.id.complaint_edt_Address4);
         edt_contact_person_name = (EditText) rootView.findViewById(R.id.complaint_edt_contact_person);
         edt_phone_no = (EditText) rootView.findViewById(R.id.complaint_edt_phone_no);
         edt_addon_phone = (EditText) rootView.findViewById(R.id.complaint_edt_addon_phone_no);
@@ -277,7 +281,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 if (str_selected_model.equals("null")) {
                     TastyToast.makeText(getActivity(), "Please Select a Valid Model", TastyToast.LENGTH_LONG, TastyToast.INFO);
                 } else if (str_selected_model.equals("NXG")) {
-
+                    edt_model.setText("NXG");
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -285,15 +289,24 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("2KD")) {
-
+                    edt_model.setText("2KD");
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
-                } else if (str_selected_model.equals("2KD7")) {
+                    // Complaint Type Loader
+                    Arraylist_complaint_type = new String[]{"CONTINEOUS EXAUST", "PRESSURE DROP"
+                            , "PRE FILTER ADV CONTINEOUS LEAK", "ACTIVATED ALUMINA POWDERED", "FILTER ELEMENT DAMAGE", "TIMER FAILURE"
+                            , "WATER IN THE LINE", "BODY LEAK", "OTHERS", "OTHERS"};
+                    List<String> compaint_type = new ArrayList<String>(Arrays.asList(Arraylist_complaint_type));
+                    ArrayAdapter<String> adapter_compaint_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, compaint_type);
+                    adapter_compaint_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spn_complaint_type.setAdapter(adapter_compaint_type);
 
+                } else if (str_selected_model.equals("2KD7")) {
+                    edt_model.setText("NXG");
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -301,7 +314,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("2KW")) {
-
+                    edt_model.setText("2KW");
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -309,7 +322,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("RAD")) {
-
+                    edt_model.setText("RAD");
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -317,23 +330,41 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("HLN")) {
-
+                    edt_model.setText("HLN");
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_complaint_category.setAdapter(adapter_complaint_category);
+
+                    // Complaint Type Loader
+                    Arraylist_complaint_type = new String[]{"CONTINEOUS EXAUST", "PRESSURE DROP"
+                            , "PRE FILTER ADV CONTINEOUS LEAK", "ACTIVATED ALUMINA POWDERED", "FILTER ELEMENT DAMAGE", "TIMER FAILURE"
+                            , "WATER IN THE LINE", "BODY LEAK", "OTHERS", "OTHERS"};
+                    List<String> compaint_type = new ArrayList<String>(Arrays.asList(Arraylist_complaint_type));
+                    ArrayAdapter<String> adapter_compaint_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, compaint_type);
+                    adapter_compaint_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spn_complaint_type.setAdapter(adapter_compaint_type);
 
                 } else if (str_selected_model.equals("HLD")) {
-
+                    edt_model.setText("HLD");
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
-                } else if (str_selected_model.equals("SPD")) {
+                    // Complaint Type Loader
+                    Arraylist_complaint_type = new String[]{"CONTINEOUS EXAUST", "PRESSURE DROP"
+                            , "PRE FILTER ADV CONTINEOUS LEAK", "ACTIVATED ALUMINA POWDERED", "FILTER ELEMENT DAMAGE", "TIMER FAILURE"
+                            , "WATER IN THE LINE", "BODY LEAK", "OTHERS", "OTHERS"};
+                    List<String> compaint_type = new ArrayList<String>(Arrays.asList(Arraylist_complaint_type));
+                    ArrayAdapter<String> adapter_compaint_type = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, compaint_type);
+                    adapter_compaint_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spn_complaint_type.setAdapter(adapter_compaint_type);
 
+                } else if (str_selected_model.equals("SPD")) {
+                    edt_model.setText("SPD");
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -341,7 +372,6 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("GCT +")) {
-
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -349,7 +379,6 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("GCT")) {
-
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -357,7 +386,6 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("SCT/SCB")) {
-
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -365,7 +393,6 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("DRY COOLING TOWER")) {
-
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -373,7 +400,6 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("CHILLER")) {
-
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -381,13 +407,11 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else {
-
                     Arraylist_complaint_category = new String[]{"ON CALLS"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
                     adapter_complaint_category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spn_complaint_category.setAdapter(adapter_complaint_category);
-
                 }
 
             }
@@ -471,6 +495,9 @@ public class Fragment_ComplaintRegister extends Fragment {
                 str_send_complaint_no = txt_complaint_no.getText().toString();
                 str_send_product_name = str_selected_product;
                 str_send_model = str_selected_model;
+                String str_modelno1 = edt_model.getText().toString();
+                String str_modelno = edt_model_number.getText().toString();
+                str_send_model_number = str_modelno1 + str_modelno;
                 str_send_complaint_category = str_selected_complaint_category;
                 str_send_complaint_type = str_selected_complaint_type;
                 str_send_pur_through = str_selected_dealer;
@@ -482,6 +509,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 str_send_address1 = edt_city.getText().toString();
                 str_send_address2 = edt_street.getText().toString();
                 str_send_address3 = edt_landmark.getText().toString();
+                str_send_address4 = edt_pincode.getText().toString();
                 str_send_contact_person_name = edt_contact_person_name.getText().toString();
                 str_send_phone_number = edt_phone_no.getText().toString();
                 str_send_addon_phone_number = edt_addon_phone.getText().toString();
@@ -537,12 +565,16 @@ public class Fragment_ComplaintRegister extends Fragment {
                 } else if (str_send_email.equals("")) {
                     TastyToast.makeText(getActivity(), "Please enter Email", TastyToast.LENGTH_LONG, TastyToast.INFO);
                     edt_addon_phone.setError("Please Enter a Email");
+                } else if (str_send_address4.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please enter Pincode", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_addon_phone.setError("Please Enter a Email");
                 } else {
 
                     System.out.println("str_send_date " + " : " + str_send_date);
                     System.out.println("str_send_complaint_no " + " : " + str_send_complaint_no);
                     System.out.println("str_send_product_name " + " : " + str_send_product_name);
                     System.out.println("str_send_model " + " : " + str_send_model);
+                    System.out.println("str_send_model Numer" + " : " + str_send_model_number);
                     System.out.println("str_send_complaint_category " + " : " + str_send_complaint_category);
                     System.out.println("str_send_complaint_type " + " : " + str_send_complaint_type);
                     System.out.println("str_send_pur_through " + " : " + str_send_pur_through);
@@ -554,6 +586,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                     System.out.println("str_send_address1 " + " : " + str_send_address1);
                     System.out.println("str_send_address2 " + " : " + str_send_address2);
                     System.out.println("str_send_address3 " + " : " + str_send_address3);
+                    System.out.println("str_send_address4 " + " : " + str_send_address4);
                     System.out.println("str_send_contact_person_name " + " : " + str_send_contact_person_name);
                     System.out.println("str_send_phone_number " + " : " + str_send_phone_number);
                     System.out.println("str_send_addon_phone_number " + " : " + str_send_addon_phone_number);
@@ -754,6 +787,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
             @Override
             public void onResponse(String response) {
+                FunctionAlert();
                 Log.d(TAG, response.toString());
                 Log.d("Complaint_Number", response.toString());
 
@@ -822,6 +856,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 params.put("comp_type", str_send_complaint_type);
                 params.put("pd_name", str_send_product_name);
                 params.put("model", str_send_model);
+                params.put("model_num", str_send_model_number);
                 params.put("pur_through", str_send_pur_through);
                 params.put("mcsnum", str_Send_mc1);
                 params.put("mcs2", str_send_mc2);
@@ -831,6 +866,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 params.put("street", str_send_address1);
                 params.put("landmark", str_send_address2);
                 params.put("city", str_send_address3);
+                params.put("pincode", str_send_address4);
                 params.put("contactperson", str_send_contact_person_name);
                 params.put("phoneno", str_send_phone_number);
                 params.put("addon_phoneno", str_send_addon_phone_number);
@@ -847,8 +883,8 @@ public class Fragment_ComplaintRegister extends Fragment {
     }
 
     /***************************************
-     *  Complaint Registered Alert
-     * ******************************************/
+     * Complaint Registered Alert
+     ******************************************/
 
     private void FunctionAlert() {
 
@@ -868,7 +904,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                                     queue = Volley.newRequestQueue(getActivity());
                                     complaint_no();
 
-                                }catch (Exception e) {
+                                } catch (Exception e) {
 
                                 }
 
