@@ -57,8 +57,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
                     android:entries="@array/status"
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
 
             </LinearLayout>
@@ -88,6 +88,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_image_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -117,6 +118,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_audio_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"

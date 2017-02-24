@@ -9,12 +9,14 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -25,8 +27,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,10 +66,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.StringTokenizer;
+
+import banyan.com.gememployee.global.SessionManager;
 
 
 /**
@@ -76,6 +89,11 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
     ImageView img_post_image;
     TextView txt_audname;
     Button btn_submit, upload_btn_stop_record;
+    Spinner spn_status;
+    LinearLayout linear_image, linear_audio;
+    EditText edt_description;
+
+
     float vol;
 
     String str_function = "";
@@ -127,6 +145,11 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
     String str_audio_path = "";
 
+    // Session Manager Class
+    SessionManager session;
+
+    String str_send_user_id, str_comp_number, str_comp_status, str_aud_name, str_process_desc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +164,18 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        // Session Variables
+        session = new SessionManager(Activity_Pending_Complaint_Update.this);
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+        // name
+        str_send_user_id = user.get(SessionManager.KEY_USER_ID);
+
+        // Complaint Number
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext());
+
+        str_comp_number = sharedPreferences.getString("str_pending_select_comp_number", "str_pending_select_comp_number");
 
         permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
 
@@ -149,6 +184,13 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
         mRecordingView = (AnimatedRecordingView) findViewById(R.id.recording);
         upload_btn_stop_record = (Button) findViewById(R.id.upload_btn_stop_record);
         txt_audname = (TextView) findViewById(R.id.upload_txt_aud_name);
+
+        spn_status = (Spinner) findViewById(R.id.updatecomplaint_spinner_status);
+
+        linear_image = (LinearLayout) findViewById(R.id.linear_image_layout);
+        linear_audio = (LinearLayout) findViewById(R.id.linear_audio_layout);
+
+        edt_description = (EditText) findViewById(R.id.complaintupdate_edt_cus_report);
 
         /*************************************
          * Runtime Permission call
@@ -189,7 +231,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
                     }
                 } else {
-                    TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Aud is already is der", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Aud already is der", TastyToast.LENGTH_LONG, TastyToast.INFO);
                 }
 
             }
@@ -204,67 +246,91 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                     stopRecording();
                     upload_btn_stop_record.setVisibility(View.GONE);
                     txt_audname.setVisibility(View.VISIBLE);
-                    txt_audname.setText(""+str_audio_path);
+                    txt_audname.setText("" + str_audio_path);
                 } catch (Exception e) {
 
                 }
             }
         });
 
+        /*******************************
+         *  Spinner Loaders
+         * ******************************/
+
+        // Product and Product Model Spinner
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Activity_Pending_Complaint_Update.this, R.array.status, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_status.setAdapter(adapter);
+
+        // Spinner Product Interface
+        spn_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+
+                str_comp_status = parent.getItemAtPosition(pos).toString();
+
+                if (str_comp_status.equals("null")) {
+
+                    TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Select Status", TastyToast.LENGTH_LONG, TastyToast.INFO);
+
+                } else if (str_comp_status.equals("Completed")) {
+
+                    linear_image.setVisibility(View.VISIBLE);
+                    linear_audio.setVisibility(View.VISIBLE);
+
+                } else {
+
+                    linear_image.setVisibility(View.GONE);
+                    linear_audio.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //Another interface callback
+            }
+
+        });
+
+
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                System.out.println("IMA : " + encodedstring);
-                System.out.println("AUD : " + str_audio_path);
+                str_process_desc = edt_description.getText().toString();
 
-                if (encodedstring.equals("")) {
-                    TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Capture an Image", TastyToast.LENGTH_LONG, TastyToast.INFO);
-                } else if (str_audio_path.equals("")) {
-                    TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Capture a Audio", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                if (str_comp_status.equals("null")) {
+                    TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Select a Status", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                } else if (str_comp_status.equals("Completed")) {
+
+                    if (str_process_desc.equals("")) {
+                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Enter Description", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    } else if (encodedstring.equals("")) {
+                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Capture an Image", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    } else if (str_aud_name.equals("")) {
+                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Capture a Audio", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    } else {
+
+                        try {
+                            pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
+                            pDialog.setMessage("Please wait...");
+                            pDialog.show();
+                            pDialog.setCancelable(false);
+                            doFileUpload();
+                        } catch (Exception e) {
+
+                        }
+                    }
+
                 } else {
 
-                    try {
-                        pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
-                        pDialog.setMessage("Please wait...");
-                        pDialog.show();
-                        pDialog.setCancelable(false);
-                        queue = Volley.newRequestQueue(Activity_Pending_Complaint_Update.this);
-                        Register_Complaint();
-                    } catch (Exception e) {
-
-                    }
-
                 }
-
-                /*if (encodedstring.equals("")){
-
-                }else {
-                    try {
-                        pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
-                        pDialog.setMessage("Please wait...");
-                        pDialog.show();
-                        pDialog.setCancelable(false);
-                        queue = Volley.newRequestQueue(Activity_Pending_Complaint_Update.this);
-                        Register_Complaint();
-                    } catch (Exception e) {
-
-                    }
-                }*/
             }
         });
 
-     /*   // start recording animation
-        mRecordingView.start();
-        // set the mic volume
-        mRecordingView.setVolume(vol);
-        // start loading animation
-        mRecordingView.loading();
-        // start finished animation
-      //  mRecordingView.stop();*/
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -539,17 +605,6 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
         BitmapFactory.Options options = new BitmapFactory.Options();
 
-        // options.inSampleSize = 6;
-
-       /* bm = BitmapFactory.decodeFile(imagepath1, options);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 25, stream);
-        byte[] byte_arr = stream.toByteArray();
-        bm = Bitmap.createScaledBitmap(bm, 170, 170, true);
-        img_post_image.setImageBitmap(bm);
-        // Encode Image to String
-       encodedstring = Base64.encodeToString(byte_arr, 0);
-*/
         // Image location URL
         imagepath1 = fileUri.getPath();
         Log.e("path", "----------------" + imagepath1);
@@ -645,76 +700,6 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
     }
 
 
-    /***************************************
-     * Function upload Image
-     ************************************/
-
-    private void Register_Complaint() {
-
-        String str_register_complaint = "http://gemservice.in/employee_app/upload_image.php";
-
-        File source = new File(imagepath1);
-
-        StringRequest request = new StringRequest(Request.Method.POST,
-                str_register_complaint, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG_NAME, response.toString());
-                Log.d("Complaint_Number", response.toString());
-
-                try {
-
-                    doFileUpload();
-
-                    /*JSONObject obj = new JSONObject(response);
-                    int success = obj.getInt("success");
-
-                    System.out.println("REG" + success);
-
-                    if (success == 1) {
-
-                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Posted Successfully :)", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                        pDialog.hide();
-
-
-                    } else {
-
-                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Something Went Wrong :(", TastyToast.LENGTH_LONG, TastyToast.ERROR);
-                        pDialog.hide();
-
-                    }*/
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-
-                pDialog.hide();
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                pDialog.hide();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("image", encodedstring);
-
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        queue.add(request);
-    }
-
     /**************************************
      * Function Audio Recording Begins
      ***********************************/
@@ -755,6 +740,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
         System.out.println("path" + file.getAbsolutePath() + "/" + System.currentTimeMillis() + file_exts[currentFormat]);
         str_audio_path = file.getAbsolutePath() + "/" + System.currentTimeMillis() + file_exts[currentFormat];
+        str_aud_name = System.currentTimeMillis() + file_exts[currentFormat];
         return (file.getAbsolutePath() + "/" + System.currentTimeMillis() + file_exts[currentFormat]);
 
     }
@@ -846,7 +832,12 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
             dos.flush();
             dos.close();
 
-            TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Posted Successfully :)", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+            try {
+                queue = Volley.newRequestQueue(Activity_Pending_Complaint_Update.this);
+                Register_Complaint();
+            } catch (Exception e) {
+
+            }
 
         } catch (MalformedURLException ex) {
             Log.e("Debug", "error: " + ex.getMessage(), ex);
@@ -871,6 +862,118 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
         } catch (IOException ioex) {
             Log.e("Debug", "error: " + ioex.getMessage(), ioex);
         }
+    }
+
+    /***************************************
+     * Function upload Image
+     ************************************/
+
+    private void Register_Complaint() {
+
+        String str_register_complaint = "http://gemservice.in/employee_app/upload_image.php";
+
+        File source = new File(imagepath1);
+
+        StringRequest request = new StringRequest(Request.Method.POST,
+                str_register_complaint, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG_NAME, response.toString());
+                Log.d("Complaint_Number", response.toString());
+
+                try {
+
+                    JSONObject obj = new JSONObject(response);
+                    int success = obj.getInt("success");
+
+                    System.out.println("REG" + success);
+
+                    if (success == 1) {
+
+                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Posted Successfully :)", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                        pDialog.hide();
+                        FunctionAlert();
+
+
+                    } else {
+
+                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Something Went Wrong :(", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                        pDialog.hide();
+
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+
+                pDialog.hide();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.hide();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("image", encodedstring);
+                params.put("user", str_send_user_id);
+                params.put("comp_number", str_comp_number);
+                params.put("aud_name", str_aud_name);
+                params.put("status", str_comp_status);
+                params.put("desc", str_process_desc);
+
+                System.out.println(" Image : " + encodedstring);
+                System.out.println(" user : " + str_send_user_id);
+                System.out.println(" comp_number : " + str_comp_number);
+                System.out.println(" aud_name : " + str_aud_name);
+                System.out.println(" status : " + str_comp_status);
+                System.out.println(" desc : " + str_process_desc);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        queue.add(request);
+    }
+
+    private void FunctionAlert() {
+
+        new android.app.AlertDialog.Builder(Activity_Pending_Complaint_Update.this)
+                .setTitle("Gem India")
+                .setMessage("Compaint Registered Successfully :)")
+                .setIcon(R.mipmap.ic_launcher)
+
+                .setPositiveButton("Done",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+
+
+                                edt_description.setText("");
+                                imagepath1 = "";
+                                String uri = "@drawable/ic_placeholder.png";
+
+                                int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+                                Drawable res = getResources().getDrawable(imageResource);
+                                img_post_image.setImageDrawable(res);
+
+                                txt_audname.setText("");
+
+                                dialog.dismiss();
+
+
+                            }
+                        }).show();
     }
 
 }

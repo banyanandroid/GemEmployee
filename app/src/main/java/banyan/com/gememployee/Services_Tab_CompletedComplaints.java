@@ -76,6 +76,8 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
     public static final String TAG_REG_TIMESTAMP = "comp_reg_timestamp";
     public static final String TAG_ATTENDCALL_TIMESTAMP = "attencall_timestamp";
     public static final String TAG_CALL_CLOSING_TIMESTAMP = "complete_report_timestamp";
+    public static final String TAG_SERVICE_DES = "service_description";
+    public static final String TAG_IMAGE = "image";
 
 
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -173,6 +175,8 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
                 String str_select_comp_reg_time = complaint_list.get(position).get(TAG_REG_TIMESTAMP);
                 String str_select_call_attending_time = complaint_list.get(position).get(TAG_ATTENDCALL_TIMESTAMP);
                 String str_select_call_closing_time = complaint_list.get(position).get(TAG_CALL_CLOSING_TIMESTAMP);
+                String str_service_dec = complaint_list.get(position).get(TAG_SERVICE_DES);
+                String str_image = complaint_list.get(position).get(TAG_IMAGE);
 
 
                 System.out.println("Clicked Chika str_select_status" + str_select_status);
@@ -212,6 +216,8 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
                 editor.putString("str_select_comp_reg_time", str_select_comp_reg_time);
                 editor.putString("str_select_call_attending_time", str_select_call_attending_time);
                 editor.putString("str_select_call_closing_time", str_select_call_closing_time);
+                editor.putString("str_service_des", str_service_dec);
+                editor.putString("str_image", str_image);
 
                 editor.commit();
 
@@ -297,6 +303,8 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
                             String str_comp_reg_time = obj1.getString(TAG_REG_TIMESTAMP);
                             String str_call_attending_time = obj1.getString(TAG_ATTENDCALL_TIMESTAMP);
                             String str_call_closing_time = obj1.getString(TAG_CALL_CLOSING_TIMESTAMP);
+                            String str_service_description = obj1.getString(TAG_SERVICE_DES);
+                            String str_image = obj1.getString(TAG_IMAGE);
 
                             // creating new HashMap
                             HashMap<String, String> map = new HashMap<String, String>();
@@ -333,6 +341,8 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
                             map.put(TAG_REG_TIMESTAMP, str_comp_reg_time);
                             map.put(TAG_ATTENDCALL_TIMESTAMP, str_call_attending_time);
                             map.put(TAG_CALL_CLOSING_TIMESTAMP, str_call_closing_time);
+                            map.put(TAG_SERVICE_DES, str_service_description);
+                            map.put(TAG_IMAGE, str_image);
 
                             complaint_list.add(map);
 
