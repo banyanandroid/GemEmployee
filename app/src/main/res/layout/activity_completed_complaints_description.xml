@@ -42,9 +42,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -53,8 +53,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -72,9 +72,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -83,8 +83,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -102,9 +102,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -113,8 +113,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -132,9 +132,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -143,29 +143,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|left"
                     android:text="Complaint Type"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:id="@+id/textView" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/complaint_des_txtview_comp_type"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -174,8 +174,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -193,9 +193,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -204,8 +204,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -223,9 +223,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -234,8 +234,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -253,9 +253,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -264,29 +264,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|left"
                     android:text="MC/SC No"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:id="@+id/textView3" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/complaint_des_txtview_mcslno"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -295,8 +295,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -314,9 +314,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -325,8 +325,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -344,9 +344,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -355,8 +355,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -374,9 +374,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -385,29 +385,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/textView4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|left"
                     android:text="Street"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:id="@+id/textView4" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/complaint_des_txtview_street"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -416,8 +416,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -435,9 +435,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -446,8 +446,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -465,9 +465,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -476,8 +476,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -495,9 +495,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -506,8 +506,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -525,9 +525,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -536,8 +536,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -555,9 +555,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -566,8 +566,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -585,9 +585,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -596,8 +596,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -615,9 +615,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -626,8 +626,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -645,9 +645,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -656,8 +656,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -675,9 +675,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -686,8 +686,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -705,9 +705,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -716,8 +716,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -735,9 +735,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -746,8 +746,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -765,9 +765,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -776,8 +776,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -795,9 +795,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -806,8 +806,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -825,9 +825,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -836,8 +836,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -855,9 +855,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -866,8 +866,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -885,9 +885,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -896,9 +896,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -916,9 +916,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -927,9 +927,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -938,7 +938,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="Task Description"
+                    android:text="Service Description"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -947,28 +947,43 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     android:gravity="center|left"
                     android:text=""
-                    android:background="@drawable/bg_parent_rounded_corner"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_image_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:orientation="horizontal"
+                android:background="@drawable/bg_parent_rounded_corner"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:weightSum="2">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Select a Image"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:id="@+id/complaint_complete_img"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_placeholder" />
 
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>

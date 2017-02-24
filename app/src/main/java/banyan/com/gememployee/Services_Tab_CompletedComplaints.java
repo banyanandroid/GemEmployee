@@ -179,9 +179,6 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
                 String str_image = complaint_list.get(position).get(TAG_IMAGE);
 
 
-                System.out.println("Clicked Chika str_select_status" + str_select_status);
-                System.out.println("Clicked Chika str_select_comp_reg_time" + str_select_comp_reg_time);
-
                 SharedPreferences sharedPreferences = PreferenceManager
                         .getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -218,6 +215,9 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
                 editor.putString("str_select_call_closing_time", str_select_call_closing_time);
                 editor.putString("str_service_des", str_service_dec);
                 editor.putString("str_image", str_image);
+
+                System.out.println("Clicked Chika str_service_dec" + str_service_dec);
+                System.out.println("Clicked Chika str_image" + str_image);
 
                 editor.commit();
 
