@@ -1,14 +1,21 @@
 package banyan.com.gememployee;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.sdsmdg.tastytoast.TastyToast;
 
 /**
  * Created by Jo on 2/17/2017.
@@ -19,6 +26,8 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
     private Toolbar mToolbar;
 
     Button btn_proceed;
+
+    String str_call_number;
 
     String str_id, str_user_code, str_comp_number, str_date, str_product_name, str_model, str_comp_cate, str_comp_type, str_purchased_throug, str_mcslno,
             str_warranty, str_customer_name, str_address, str_street, str_landmark, str_city, str_contact_person_name, str_phone_no, str_addon_phone_no,
@@ -161,6 +170,87 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
         } catch (Exception e) {
 
         }
+
+        txt_phone_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                str_call_number = str_phone_no;
+                if (str_call_number.equals("")) {
+                    TastyToast.makeText(Activity_Pending_complaints_description.this, "Number Not Available :(", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                } else {
+                    FunctionCAllAlert(str_call_number);
+                }
+
+            }
+        });
+
+        txt_cellno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                str_call_number = str_cellno;
+                if (str_call_number.equals("")) {
+                    TastyToast.makeText(Activity_Pending_complaints_description.this, "Number Not Available :(", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                } else {
+                    FunctionCAllAlert(str_call_number);
+                }
+            }
+        });
+
+        txt_addon_phoneno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                str_call_number = str_addon_phone_no;
+                if (str_call_number.equals("")) {
+                    TastyToast.makeText(Activity_Pending_complaints_description.this, "Number Not Available :(", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                } else {
+                    FunctionCAllAlert(str_call_number);
+                }
+            }
+        });
+
+        txt_email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent mailClient = new Intent(Intent.ACTION_VIEW);
+                mailClient.setClassName("com.google.android.gm", "com.google.android.gm.ConversationListActivity");
+                startActivity(mailClient);
+            }
+        });
+    }
+
+    private void FunctionCAllAlert(final String str_number) {
+
+        new android.app.AlertDialog.Builder(Activity_Pending_complaints_description.this)
+                .setTitle("Gem India")
+                .setMessage("Want to make a call to this Number?\n" + str_number)
+                .setIcon(R.mipmap.ic_launcher)
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                dialog.dismiss();
+                            }
+                        }).setPositiveButton("Done",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        try {
+                            Intent callIntent = new Intent(Intent.ACTION_CALL);
+                            callIntent.setData(Uri.parse("tel:" + str_number));
+                            if (ActivityCompat.checkSelfPermission(Activity_Pending_complaints_description.this,
+                                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                return;
+                            }
+                            startActivity(callIntent);
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }).show();
+
     }
 
 }

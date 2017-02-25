@@ -949,7 +949,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
         new android.app.AlertDialog.Builder(Activity_Pending_Complaint_Update.this)
                 .setTitle("Gem India")
-                .setMessage("Compaint Registered Successfully :)")
+                .setMessage("Compaint Updated Successfully :)")
                 .setIcon(R.mipmap.ic_launcher)
 
                 .setPositiveButton("Done",
@@ -958,16 +958,9 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
 
-
-                                edt_description.setText("");
-                                imagepath1 = "";
-                                String uri = "@drawable/ic_placeholder.png";
-
-                                int imageResource = getResources().getIdentifier(uri, null, getPackageName());
-                                Drawable res = getResources().getDrawable(imageResource);
-                                img_post_image.setImageDrawable(res);
-
-                                txt_audname.setText("");
+                                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(i);
+                                finish();
 
                                 dialog.dismiss();
 

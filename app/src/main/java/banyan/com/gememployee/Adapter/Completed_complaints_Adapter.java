@@ -66,13 +66,13 @@ public class Completed_complaints_Adapter extends BaseAdapter {
         String str_product = result.get(Services_Tab_CompletedComplaints.TAG_PRODUCT_NAME);
 
         if (str_product.equals("DRYER")){
-            comp_no.setBackgroundColor(Color.parseColor("#24c6d5"));
+            comp_no.setBackgroundColor(Color.parseColor("#42A5F5"));
         }else if (str_product.equals("CHILLER")){
-            comp_no.setBackgroundColor(Color.parseColor("#4DB6AC"));
+            comp_no.setBackgroundColor(Color.parseColor("#5C6BC0"));
         }else if (str_product.equals("COOLING TOWER")){
-            comp_no.setBackgroundColor(Color.parseColor("#fcba59"));
+            comp_no.setBackgroundColor(Color.parseColor("#7E57C2"));
         }else if (str_product.equals("OTHERS")){
-            comp_no.setBackgroundColor(Color.parseColor("#8C9EFF"));
+            comp_no.setBackgroundColor(Color.parseColor("#FFB300"));
         }
 
         return v;
