@@ -1,17 +1,14 @@
 package banyan.com.gememployee;
 
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +19,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -44,10 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import banyan.com.gememployee.global.AppConfig;
 import banyan.com.gememployee.global.SessionManager;
-
-import static banyan.com.gememployee.Activity_Login.queue;
 
 /**
  * Created by Jo on 2/9/2017.
@@ -79,7 +74,10 @@ public class Fragment_ComplaintRegister extends Fragment {
             str_send_warranty_status, str_send_company_name, str_send_address1, str_send_address2, str_send_address3, str_send_address4,
             str_send_contact_person_name, str_send_phone_number, str_send_addon_phone_number, str_send_email, str_send_addon_email;
 
-    int int_months_of_waranty = 0;
+    String str_year, str_warranty_type;
+    String str_month = "month";
+    String str_current_year;
+    String str_current_month;
 
     ArrayList<String> Arraylist_dealers = null;
     String[] Arraylist_product_model;
@@ -140,6 +138,8 @@ public class Fragment_ComplaintRegister extends Fragment {
         btn_submit = (Button) rootView.findViewById(R.id.complaint_btn_submit);
 
 
+        edt_warranty_Status.setKeyListener(null);
+
         //String Array
 
         Arraylist_dealers = new ArrayList<String>();
@@ -162,6 +162,9 @@ public class Fragment_ComplaintRegister extends Fragment {
         SimpleDateFormat mdformat = new SimpleDateFormat("dd / MM / yyyy");
         String strDate = mdformat.format(calendar.getTime());
         txt_date.setText("" + strDate);
+
+        str_current_year = "" + calendar.get(Calendar.YEAR);
+        str_current_month = "" + calendar.get(Calendar.MONTH);
 
         /*******************************
          *  Spinner Loaders
@@ -209,7 +212,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 } else if (str_selected_product.equals("CHILLER")) {
 
                     layout_model.setVisibility(View.GONE);
-
+                    str_warranty_type = "CHILLER";
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"CHILLER"};
                     List<String> produt_type = new ArrayList<String>(Arrays.asList(Arraylist_product_model));
@@ -229,6 +232,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 } else if (str_selected_product.equals("COOLING TOWER")) {
 
                     layout_model.setVisibility(View.GONE);
+                    str_warranty_type = "DRY COOLING TOWER";
 
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"GCT +", "GCT", "SCT/SCB", "DRY COOLING TOWER"};
@@ -247,7 +251,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 } else if (str_selected_product.equals("OTHERS")) {
 
                     layout_model.setVisibility(View.GONE);
-
+                    str_warranty_type = "SMALL PRODUCTS";
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"SMALL PRODUCTS"};
                     List<String> produt_type = new ArrayList<String>(Arrays.asList(Arraylist_product_model));
@@ -286,7 +290,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                     TastyToast.makeText(getActivity(), "Please Select a Valid Model", TastyToast.LENGTH_LONG, TastyToast.INFO);
                 } else if (str_selected_model.equals("NXG")) {
                     edt_model.setText("NXG");
-                    int_months_of_waranty = 30;
+                    str_warranty_type = "NXG";
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -295,7 +299,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("2KD")) {
                     edt_model.setText("2KD");
-                    int_months_of_waranty = 30;
+                    str_warranty_type = "2KD";
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -313,7 +317,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("2KD7")) {
                     edt_model.setText("2KD7");
-                    int_months_of_waranty = 30;
+                    str_warranty_type = "2KD7";
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -322,7 +326,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("2KW")) {
                     edt_model.setText("2KW");
-                    int_months_of_waranty = 30;
+                    str_warranty_type = "2KW";
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -331,7 +335,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("RAD")) {
                     edt_model.setText("RAD");
-                    int_months_of_waranty = 18;
+                    str_warranty_type = "RAD";
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -340,7 +344,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("HLN")) {
                     edt_model.setText("HLN");
-                    int_months_of_waranty = 18;
+                    str_warranty_type = "HLN";
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -358,7 +362,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("HLD")) {
                     edt_model.setText("HLD");
-                    int_months_of_waranty = 18;
+                    str_warranty_type = "HLD";
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -376,7 +380,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("SPD")) {
                     edt_model.setText("SPD");
-                    int_months_of_waranty = 30;
+                    str_warranty_type = "SPD";
                     Arraylist_complaint_category = new String[]{"COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -384,7 +388,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("GCT +")) {
-                    int_months_of_waranty = 30;
+                    str_warranty_type = "GCT +";
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -392,7 +396,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("GCT")) {
-                    int_months_of_waranty = 18;
+                    str_warranty_type = "GCT";
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -400,7 +404,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                     spn_complaint_category.setAdapter(adapter_complaint_category);
 
                 } else if (str_selected_model.equals("SCT/SCB")) {
-                    int_months_of_waranty = 18;
+                    str_warranty_type = "SCT/SCB";
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "ERECTION", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -490,6 +494,34 @@ public class Fragment_ComplaintRegister extends Fragment {
             }
         });
 
+        edt_mc2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                if (i == 1) {
+
+                    str_month = edt_mc2.getText().toString();
+                    int month = Integer.parseInt(str_month);
+
+                    if (month >= 13) {
+                        TastyToast.makeText(getActivity(), "Please Enter Valid Month", TastyToast.LENGTH_LONG, TastyToast.WARNING);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+
+            }
+        });
+
         edt_mc3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -498,10 +530,36 @@ public class Fragment_ComplaintRegister extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (i2 == 4) {
-                    System.out.println("start music :" + i2);
-                }
+                if (i == 3) {
+                    str_year = edt_mc3.getText().toString();
 
+                    int int_current_year = Integer.parseInt(str_current_year);
+                    int select_year = Integer.parseInt(str_year);
+
+                    if (select_year <= int_current_year) {
+                        if (str_month.equals("month")) {
+                            TastyToast.makeText(getActivity(), "Please Enter Month", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                        }  else {
+                            System.out.println("start model :" + str_warranty_type);
+                            System.out.println("start month :" + str_month);
+                            System.out.println("start year :" + str_year);
+
+                            try {
+                                pDialog = new ProgressDialog(getActivity());
+                                pDialog.setMessage("Please wait...");
+                                pDialog.show();
+                                pDialog.setCancelable(false);
+                                queue = Volley.newRequestQueue(getActivity());
+                                Function_warranty();
+                            } catch (Exception e) {
+
+                            }
+                        }
+
+                    } else {
+                        TastyToast.makeText(getActivity(), "Please Enter Valid Year", TastyToast.LENGTH_LONG, TastyToast.WARNING);
+                    }
+                }
             }
 
             @Override
@@ -649,7 +707,7 @@ public class Fragment_ComplaintRegister extends Fragment {
     }
 
     /********************************
-     * User Authentication
+     * User Function_GetDelars
      *********************************/
 
     private void Function_GetDelars() {
@@ -726,6 +784,64 @@ public class Fragment_ComplaintRegister extends Fragment {
         // Adding request to request queue
         queue.add(request);
     }
+
+
+    /********************************
+     * Function Get Waranty Status
+     *********************************/
+    private void Function_warranty() {
+        String str_warranty_url = "http://gemservice.in/employee_app/2017_waranty.php";
+        String tag_json_obj = "json_obj_req";
+
+        StringRequest request = new StringRequest(Request.Method.POST,
+                str_warranty_url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, response.toString());
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    int success = obj.getInt("success");
+
+                    if (success == 1) {
+                        String str_warranty_msg = obj.getString("message");
+                        edt_warranty_Status.setText("" + str_warranty_msg);
+
+                    } else {
+                        String str_warranty_msg = obj.getString("message");
+                        edt_warranty_Status.setText("" + str_warranty_msg);
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                pDialog.hide();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("year", str_year);
+                params.put("month", str_month);
+                params.put("type", str_warranty_type);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        queue.add(request);
+    }
+
 
     /********************************
      * Complaint Number
@@ -913,6 +1029,9 @@ public class Fragment_ComplaintRegister extends Fragment {
 
         };
 
+        int socketTimeout = 50000;//30 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
         // Adding request to request queue
         queue.add(request);
     }

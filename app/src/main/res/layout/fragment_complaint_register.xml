@@ -297,9 +297,8 @@
                         android:id="@+id/complaint_edt_mcsl1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
+                        android:layout_weight="1.5"
                         android:background="@drawable/bg_parent_rounded_corner"
-                        android:focusable="true"
                         android:hint="MCSL"
                         android:inputType="textCapSentences"
                         android:maxLength="5"
@@ -324,7 +323,7 @@
                         android:id="@+id/complaint_edt_mcsl3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:background="@drawable/bg_parent_rounded_corner"
                         android:hint="YYYY"
                         android:inputType="number"
@@ -357,6 +356,8 @@
                         android:layout_height="wrap_content"
                         android:hint="Warranty Status *"
                         android:inputType="textCapSentences"
+                        android:editable="false"
+                        android:focusable="false"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 

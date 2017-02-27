@@ -136,7 +136,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
      *****************************************/
 
     private static final String AUDIO_RECORDER_FILE_EXT_3GP = ".mp4";
-    private static final String AUDIO_RECORDER_FILE_EXT_MP4 = ".3gp";
+    private static final String AUDIO_RECORDER_FILE_EXT_MP4 = ".mp3";
     private static final String AUDIO_RECORDER_FOLDER = "AudioRecorder";
     private MediaRecorder recorder = null;
     private int currentFormat = 0;
@@ -282,7 +282,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
                 } else {
 
-                    linear_image.setVisibility(View.GONE);
+                    linear_image.setVisibility(View.VISIBLE);
                     linear_audio.setVisibility(View.GONE);
                 }
 
@@ -326,6 +326,21 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                     }
 
                 } else {
+
+                    if (str_comp_status.equals("")) {
+                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Enter Description", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    } else {
+                        try {
+                            pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
+                            pDialog.setMessage("Please wait...");
+                            pDialog.show();
+                            pDialog.setCancelable(false);
+                            Register_Complaint_for_other();
+                        } catch (Exception e) {
+
+                        }
+                    }
+
 
                 }
             }
@@ -865,7 +880,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
     }
 
     /***************************************
-     * Function upload Image
+     * Function Completed Complaints
      ************************************/
 
     private void Register_Complaint() {
@@ -933,6 +948,86 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                 System.out.println(" user : " + str_send_user_id);
                 System.out.println(" comp_number : " + str_comp_number);
                 System.out.println(" aud_name : " + str_aud_name);
+                System.out.println(" status : " + str_comp_status);
+                System.out.println(" desc : " + str_process_desc);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        queue.add(request);
+    }
+
+
+    /***************************************
+     * Function Completed for Other Process
+     ************************************/
+
+    private void Register_Complaint_for_other() {
+
+        String str_register_complaint = "http://gemservice.in/employee_app/upload_image.php";
+
+        File source = new File(imagepath1);
+
+        StringRequest request = new StringRequest(Request.Method.POST,
+                str_register_complaint, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG_NAME, response.toString());
+                Log.d("Complaint_Number", response.toString());
+
+                try {
+
+                    JSONObject obj = new JSONObject(response);
+                    int success = obj.getInt("success");
+
+                    System.out.println("REG" + success);
+
+                    if (success == 1) {
+
+                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Posted Successfully :)", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                        pDialog.hide();
+                        FunctionAlert();
+
+
+                    } else {
+
+                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Something Went Wrong :(", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                        pDialog.hide();
+
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+
+                pDialog.hide();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.hide();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("image", encodedstring);
+                params.put("user", str_send_user_id);
+                params.put("comp_number", str_comp_number);
+                params.put("status", str_comp_status);
+                params.put("desc", str_process_desc);
+
+                System.out.println(" Image : " + encodedstring);
+                System.out.println(" user : " + str_send_user_id);
+                System.out.println(" comp_number : " + str_comp_number);
                 System.out.println(" status : " + str_comp_status);
                 System.out.println(" desc : " + str_process_desc);
 

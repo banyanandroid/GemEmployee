@@ -49,7 +49,7 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
     public static final String TAG_USER_CODE = "usercode";
     public static final String TAG_COMP_NO = "complaint_no";
     public static final String TAG_COMP_DATE = "complaint_date";
-    public static final String TAG_PRODUCT_NAME = "product_name";
+        public static final String TAG_PRODUCT_NAME = "product_name";
     public static final String TAG_MODEL = "model";
     public static final String TAG_COMP_CATE = "complaint_category";
     public static final String TAG_COMP_TYPE = "comp_type";
