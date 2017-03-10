@@ -16,25 +16,31 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity_Login"></activity>
+        <activity android:name=".Activity_Login"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Services_Tab_PendingOngoing"
+            android:screenOrientation="portrait"
             android:label="Pending and On Going"></activity>
         <activity
             android:name=".Services_Tab_CompletedComplaints"
+            android:screenOrientation="portrait"
             android:label="Completed Complaints"></activity>
         <activity
             android:name=".Activity_Completed_complaints_description"
+            android:screenOrientation="portrait"
             android:label="Completed Complaints"></activity>
         <activity
             android:name=".Activity_Pending_complaints_description"
+            android:screenOrientation="portrait"
             android:label="Pending Complaints"></activity>
         <activity
             android:name=".Activity_Pending_Complaint_Update"
@@ -42,21 +48,27 @@
             android:label="Complaint Process"></activity>
         <activity
             android:name=".Reports_Tab_All"
+            android:screenOrientation="portrait"
             android:label="ALL Reports"></activity>
         <activity
             android:name=".Reports_Tab_Warranty_Complaint"
+            android:screenOrientation="portrait"
             android:label="Warranty Complaint"></activity>
         <activity
             android:name=".Reports_Tab_OutofWarranty_Service"
+            android:screenOrientation="portrait"
             android:label="Out Of Warranty"></activity>
         <activity
             android:name=".Reports_Tab_Erection"
+            android:screenOrientation="portrait"
             android:label="Erection"></activity>
         <activity
             android:name=".Reports_Tab_PreCommisioning_Commisioning"
+            android:screenOrientation="portrait"
             android:label="Pre-Commisioning / Commisioning"></activity>
         <activity
             android:name=".Reports_Tab_AMC"
+            android:screenOrientation="portrait"
             android:label="AMC"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data

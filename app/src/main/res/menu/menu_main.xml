@@ -4,11 +4,11 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_news"
+        android:title="News and Events"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
-
+        android:icon="@drawable/ic_action_news"
+        app:showAsAction="ifRoom" />
 
 </menu>
 

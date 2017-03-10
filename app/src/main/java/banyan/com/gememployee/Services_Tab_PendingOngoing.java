@@ -141,8 +141,6 @@ public class Services_Tab_PendingOngoing extends AppCompatActivity implements Sw
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                System.out.println("Clicked Chika");
-
                 String str_select_id = complaint_list.get(position).get(TAG_ID);
                 String str_select_user_code = complaint_list.get(position).get(TAG_USER_CODE);
                 String str_select_comp_number = complaint_list.get(position).get(TAG_COMP_NO);

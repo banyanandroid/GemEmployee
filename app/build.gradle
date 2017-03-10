@@ -29,6 +29,7 @@ dependencies {
     compile 'com.android.support:design:25.1.1'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'     //Volley
     compile 'com.sdsmdg.tastytoast:tastytoast:0.0.1'    //Alert Toast
+    compile files('libs/gcm.jar')
     //Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.haozhang.libary:android-animated-recording-view:1.0'   //Voice Wave

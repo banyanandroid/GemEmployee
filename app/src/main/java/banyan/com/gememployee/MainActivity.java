@@ -10,13 +10,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.HashMap;
-import java.util.function.Function;
 
 import banyan.com.gememployee.global.SessionManager;
 

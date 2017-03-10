@@ -72,7 +72,7 @@ public class Fragment_ComplaintRegister extends Fragment {
     String str_send_date, str_send_user_id, str_send_complaint_no, str_send_complaint_date, str_send_product_name, str_send_model, str_send_model_number,
             str_send_complaint_category, str_send_complaint_type, str_send_pur_through, str_Send_mc1, str_send_mc2, str_send_mc3,
             str_send_warranty_status, str_send_company_name, str_send_address1, str_send_address2, str_send_address3, str_send_address4,
-            str_send_contact_person_name, str_send_phone_number, str_send_addon_phone_number, str_send_email, str_send_addon_email;
+            str_send_contact_person_name, str_send_phone_number,str_cell_number, str_send_addon_phone_number, str_send_email, str_send_addon_email;
 
     String str_year, str_warranty_type;
     String str_month = "month";
@@ -605,6 +605,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 str_send_address4 = edt_pincode.getText().toString();
                 str_send_contact_person_name = edt_contact_person_name.getText().toString();
                 str_send_phone_number = edt_phone_no.getText().toString();
+                str_cell_number = edt_customer_cellno.getText().toString();
                 str_send_addon_phone_number = edt_addon_phone.getText().toString();
                 str_send_email = edt_email.getText().toString();
                 str_send_addon_email = edt_addon_email.getText().toString();
@@ -655,12 +656,15 @@ public class Fragment_ComplaintRegister extends Fragment {
                 } else if (str_send_phone_number.equals("")) {
                     TastyToast.makeText(getActivity(), "Please enter Phone Number", TastyToast.LENGTH_LONG, TastyToast.INFO);
                     edt_phone_no.setError("Please Enter a Vaild Phone Number");
-                } else if (str_send_email.equals("")) {
+                }else if (str_send_email.equals("")) {
                     TastyToast.makeText(getActivity(), "Please enter Email", TastyToast.LENGTH_LONG, TastyToast.INFO);
-                    edt_addon_phone.setError("Please Enter a Email");
+                    edt_email.setError("Please Enter a Email");
+                }  else if (str_cell_number.equals("")) {
+                    TastyToast.makeText(getActivity(), "Please Customer Cell Number", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    edt_customer_cellno.setError("Please Enter a Cell Number");
                 } else if (str_send_address4.equals("")) {
                     TastyToast.makeText(getActivity(), "Please enter Pincode", TastyToast.LENGTH_LONG, TastyToast.INFO);
-                    edt_addon_phone.setError("Please Enter a Email");
+                    edt_pincode.setError("Please Enter a Pincode");
                 } else {
 
                     System.out.println("str_send_date " + " : " + str_send_date);
@@ -682,6 +686,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                     System.out.println("str_send_address4 " + " : " + str_send_address4);
                     System.out.println("str_send_contact_person_name " + " : " + str_send_contact_person_name);
                     System.out.println("str_send_phone_number " + " : " + str_send_phone_number);
+                    System.out.println("str_send_cell_number " + " : " + str_cell_number);
                     System.out.println("str_send_addon_phone_number " + " : " + str_send_addon_phone_number);
                     System.out.println("str_send_email " + " : " + str_send_email);
                     System.out.println("str_send_addon_email " + " : " + str_send_addon_email);
@@ -1020,6 +1025,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 params.put("pincode", str_send_address4);
                 params.put("contactperson", str_send_contact_person_name);
                 params.put("phoneno", str_send_phone_number);
+                params.put("cellnumber", str_cell_number);
                 params.put("addon_phoneno", str_send_addon_phone_number);
                 params.put("email", str_send_email);
                 params.put("addon_email", str_send_addon_email);

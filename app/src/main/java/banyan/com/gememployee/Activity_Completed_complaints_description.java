@@ -125,8 +125,17 @@ public class Activity_Completed_complaints_description extends AppCompatActivity
         str_service_des = sharedPreferences.getString("str_service_des", "str_service_des");
         str_image = sharedPreferences.getString("str_image", "str_image");
 
-        System.out.println("GET VALUE str_service_des : " + str_image);
-        System.out.println("GET VALUE str_image : " + str_image);
+        System.out.println("GET VALUE str_call_attending_time : " + str_call_attending_time);
+        System.out.println("GET VALUE str_call_closing_time : " + str_call_closing_time);
+        System.out.println("GET VALUE str_call_attending_time : " + str_call_attending_time);
+        System.out.println("GET VALUE str_call_closing_time : " + str_call_closing_time);
+        System.out.println("GET VALUE str_call_attending_time : " + str_call_attending_time);
+        System.out.println("GET VALUE str_call_closing_time : " + str_call_closing_time);
+        System.out.println("GET VALUE str_call_attending_time : " + str_call_attending_time);
+        System.out.println("GET VALUE str_call_closing_time : " + str_call_closing_time);
+
+        txt_call_attending_time.setText(str_call_attending_time);
+        txt_call_closing_time.setText(str_call_closing_time);
 
         String str_img_path = "http://gemservice.in/employee_app/uploadedimages/" + str_image;
         Glide.with(getApplicationContext()).load(str_img_path)
@@ -134,6 +143,8 @@ public class Activity_Completed_complaints_description extends AppCompatActivity
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(img_completed);
+
+
 
         try {
             txt_user_code.setText(str_user_code);
@@ -167,6 +178,7 @@ public class Activity_Completed_complaints_description extends AppCompatActivity
             txt_comp_attending_date.setText(str_comp_attending_date);
             txt_comp_closing_date.setText(str_comp_closing_date);
             txt_closing_date.setText(str_comp_closing_date);
+
 
         } catch (Exception e) {
 

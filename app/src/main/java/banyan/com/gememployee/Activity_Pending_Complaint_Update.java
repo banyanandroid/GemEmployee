@@ -37,9 +37,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -90,7 +92,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
     TextView txt_audname;
     Button btn_submit, upload_btn_stop_record;
     Spinner spn_status;
-    LinearLayout linear_image, linear_audio;
+    LinearLayout linear_image, linear_audio, linear_audi;
     EditText edt_description;
 
 
@@ -189,6 +191,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
         linear_image = (LinearLayout) findViewById(R.id.linear_image_layout);
         linear_audio = (LinearLayout) findViewById(R.id.linear_audio_layout);
+        linear_audi = (LinearLayout) findViewById(R.id.linear_audiosample);
 
         edt_description = (EditText) findViewById(R.id.complaintupdate_edt_cus_report);
 
@@ -279,11 +282,15 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
                     linear_image.setVisibility(View.VISIBLE);
                     linear_audio.setVisibility(View.VISIBLE);
+                    linear_audi.setVisibility(View.VISIBLE);
+                    mRecordingView.setVisibility(View.VISIBLE);
 
                 } else {
 
                     linear_image.setVisibility(View.VISIBLE);
                     linear_audio.setVisibility(View.GONE);
+                    linear_audi.setVisibility(View.GONE);
+                    mRecordingView.setVisibility(View.GONE);
                 }
 
             }
@@ -327,15 +334,25 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
                 } else {
 
+                    System.out.println("INSIDE ELSE BLOCK");
+
+                    System.out.println("INSIDE ELSE BLOCK" + str_comp_status);
+
                     if (str_comp_status.equals("")) {
                         TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Enter Description", TastyToast.LENGTH_LONG, TastyToast.INFO);
                     } else {
                         try {
+                            System.out.println( "OTHER PROCESS :: " + str_comp_status);
+                            System.out.println( "OTHER PROCESS :: " + encodedstring);
+
                             pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
                             pDialog.setMessage("Please wait...");
                             pDialog.show();
                             pDialog.setCancelable(false);
+                            queue = Volley.newRequestQueue(Activity_Pending_Complaint_Update.this);
                             Register_Complaint_for_other();
+
+                            System.out.println( "OTHER PROCESS  CALLED:: ");
                         } catch (Exception e) {
 
                         }
@@ -898,6 +915,12 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                 Log.d("Complaint_Number", response.toString());
 
                 try {
+                    FunctionAlert();
+                }catch (Exception e) {
+
+                }
+
+                try {
 
                     JSONObject obj = new JSONObject(response);
                     int success = obj.getInt("success");
@@ -956,6 +979,9 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
         };
 
+        int socketTimeout = 50000;//30 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
         // Adding request to request queue
         queue.add(request);
     }
@@ -967,17 +993,22 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
     private void Register_Complaint_for_other() {
 
-        String str_register_complaint = "http://gemservice.in/employee_app/upload_image.php";
+        String str_url_not = "http://gemservice.in/employee_app/upload_image_other_process.php";
 
         File source = new File(imagepath1);
 
         StringRequest request = new StringRequest(Request.Method.POST,
-                str_register_complaint, new Response.Listener<String>() {
+                str_url_not, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 Log.d(TAG_NAME, response.toString());
                 Log.d("Complaint_Number", response.toString());
+                try {
+                    FunctionAlert();
+                }catch (Exception e) {
+
+                }
 
                 try {
 
@@ -1020,13 +1051,11 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("image", encodedstring);
-                params.put("user", str_send_user_id);
                 params.put("comp_number", str_comp_number);
                 params.put("status", str_comp_status);
                 params.put("desc", str_process_desc);
 
                 System.out.println(" Image : " + encodedstring);
-                System.out.println(" user : " + str_send_user_id);
                 System.out.println(" comp_number : " + str_comp_number);
                 System.out.println(" status : " + str_comp_status);
                 System.out.println(" desc : " + str_process_desc);
@@ -1035,7 +1064,9 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
             }
 
         };
-
+        int socketTimeout = 50000;//30 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
         // Adding request to request queue
         queue.add(request);
     }

@@ -75,7 +75,7 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
     public static final String TAG_STATUS = "status";
     public static final String TAG_REG_TIMESTAMP = "comp_reg_timestamp";
     public static final String TAG_ATTENDCALL_TIMESTAMP = "attencall_timestamp";
-    public static final String TAG_CALL_CLOSING_TIMESTAMP = "complete_report_timestamp";
+    public static final String TAG_CALL_CLOSING_TIMESTAMP = "comp_closing_date";
     public static final String TAG_SERVICE_DES = "service_description";
     public static final String TAG_IMAGE = "image";
 
@@ -216,7 +216,12 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
                 editor.putString("str_service_des", str_service_dec);
                 editor.putString("str_image", str_image);
 
-                System.out.println("Clicked Chika str_service_dec" + str_service_dec);
+                System.out.println("Clicked Chika str_service_dec" + str_select_call_closing_time);
+                System.out.println("Clicked Chika str_service_dec" + str_select_call_closing_time);
+                System.out.println("Clicked Chika str_service_dec" + str_select_call_closing_time);
+                System.out.println("Clicked Chika str_service_dec" + str_select_call_closing_time);
+                System.out.println("Clicked Chika str_service_dec" + str_select_call_closing_time);
+                System.out.println("Clicked Chika str_service_dec" + str_select_call_closing_time);
                 System.out.println("Clicked Chika str_image" + str_image);
 
                 editor.commit();
