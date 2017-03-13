@@ -35,6 +35,14 @@
             android:screenOrientation="portrait"
             android:label="Completed Complaints"></activity>
         <activity
+            android:name=".Services_Tab_Reg_Complaints"
+            android:screenOrientation="portrait"
+            android:label="Registered Complaints"></activity>
+        <activity
+            android:name=".Activity_Registered_complaints_description"
+            android:screenOrientation="portrait"
+            android:label="Registered Complaints"></activity>
+        <activity
             android:name=".Activity_Completed_complaints_description"
             android:screenOrientation="portrait"
             android:label="Completed Complaints"></activity>
