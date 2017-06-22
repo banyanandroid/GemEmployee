@@ -1,6 +1,7 @@
 package banyan.com.gememployee;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,11 +12,29 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.sdsmdg.tastytoast.TastyToast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import banyan.com.gememployee.Adapter.Completed_complaints_Adapter;
 
 /**
  * Created by Jo on 2/17/2017.
@@ -26,6 +45,10 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
     private Toolbar mToolbar;
 
     Button btn_proceed;
+
+    String TAG = "Complaints";
+    public static RequestQueue queue;
+    ProgressDialog pDialog;
 
     String str_call_number;
 
@@ -38,6 +61,8 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
             txt_warranty, txt_customer_name, txt_adress, txt_street, txt_landmark, txt_city, txt_contact_person, txt_phone_no, txt_addon_phoneno,
             txt_cellno, txt_email, txt_addon_email, txt_fax, txt_complaint, txt_engg_alloted, txt_comp_attending_date, txt_comp_closing_date, txt_closing_date, txt_status,
             txt_comp_reg_time, txt_call_attending_time, txt_call_closing_time;
+
+    String str_select_comp_no = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,9 +150,20 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
 
                 System.out.println("Just in Clicked");
 
-                Intent i = new Intent(getApplicationContext(), Activity_Pending_Complaint_Update.class);
-                startActivity(i);
+                str_select_comp_no = txt_comp_number.getText().toString();
 
+                if (str_select_comp_no.equals("")){
+                    TastyToast.makeText(getApplicationContext(), "Complaint Number Error", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                }else {
+
+                    System.out.println("Just in Done :::::::: " + str_select_comp_no);
+                    pDialog = new ProgressDialog(Activity_Pending_complaints_description.this);
+                    pDialog.setMessage("Please wait...");
+                    pDialog.show();
+                    pDialog.setCancelable(false);
+                    queue = Volley.newRequestQueue(Activity_Pending_complaints_description.this);
+                    Function_Process_Update();
+                }
                 System.out.println("Just in Done");
 
             }
@@ -251,6 +287,70 @@ public class Activity_Pending_complaints_description extends AppCompatActivity {
                     }
                 }).show();
 
+    }
+
+    /********************************
+     * User GetCompleted_jobs
+     *********************************/
+
+    public void Function_Process_Update() {
+
+        String str_url = "http://gemservice.in/employee_app/update_process.php";
+
+        String tag_json_obj = "json_obj_req";
+        System.out.println("CAME 1");
+        StringRequest request = new StringRequest(Request.Method.POST,
+                str_url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, response.toString());
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    int success = obj.getInt("success");
+
+                    if (success == 1) {
+
+                        Intent i = new Intent(getApplicationContext(), Activity_Pending_Complaint_Update.class);
+                        startActivity(i);
+
+                    } else if (success == 0) {
+                        TastyToast.makeText(getApplicationContext(), "Internal Error", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                  pDialog.hide();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                pDialog.hide();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("comp_no", str_select_comp_no); // replace as str_id
+
+                System.out.println("comp_no" + str_select_comp_no);
+
+                return params;
+            }
+
+        };
+
+        int socketTimeout = 50000;//30 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
+
+        // Adding request to request queue
+        queue.add(request);
     }
 
 }

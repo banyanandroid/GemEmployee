@@ -72,6 +72,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -100,7 +101,6 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
     String str_function = "";
     String imagepath1 = "";
-
 
     /*************************************
      * For Image Capture
@@ -317,19 +317,43 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                         TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Enter Description", TastyToast.LENGTH_LONG, TastyToast.INFO);
                     } else if (encodedstring.equals("")) {
                         TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Capture an Image", TastyToast.LENGTH_LONG, TastyToast.INFO);
-                    } else if (str_aud_name.equals("")) {
-                        TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Capture a Audio", TastyToast.LENGTH_LONG, TastyToast.INFO);
                     } else {
 
-                        try {
-                            pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
-                            pDialog.setMessage("Please wait...");
-                            pDialog.show();
-                            pDialog.setCancelable(false);
-                            doFileUpload();
-                        } catch (Exception e) {
+                        if (str_aud_name != null && !str_aud_name.isEmpty()) {
 
+                            System.out.println("Welcome :: " + str_aud_name);
+                            System.out.println("Welcome :: " + str_aud_name);
+                            System.out.println("Welcome :: " + str_aud_name);
+                            System.out.println("Welcome :: " + str_aud_name);
+
+                            try {
+                                pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
+                                pDialog.setMessage("Please wait...");
+                                pDialog.show();
+                                pDialog.setCancelable(false);
+                                doFileUpload();
+                            } catch (Exception e) {
+
+                            }
+                        } else {
+
+                            System.out.println("Welcome :: FIN " + str_aud_name);
+                            System.out.println("Welcome :: FIN" + str_aud_name);
+                            System.out.println("Welcome :: FIN" + str_aud_name);
+                            System.out.println("Welcome :: FIN" + str_aud_name);
+
+                            try {
+                                pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
+                                pDialog.setMessage("Please wait...");
+                                pDialog.show();
+                                pDialog.setCancelable(false);
+                                queue = Volley.newRequestQueue(Activity_Pending_Complaint_Update.this);
+                                Register_Complaint();
+                            } catch (Exception e) {
+
+                            }
                         }
+
                     }
 
                 } else {
@@ -342,8 +366,8 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                         TastyToast.makeText(Activity_Pending_Complaint_Update.this, "Please Enter Description", TastyToast.LENGTH_LONG, TastyToast.INFO);
                     } else {
                         try {
-                            System.out.println( "OTHER PROCESS :: " + str_comp_status);
-                            System.out.println( "OTHER PROCESS :: " + encodedstring);
+                            System.out.println("OTHER PROCESS :: " + str_comp_status);
+                            System.out.println("OTHER PROCESS :: " + encodedstring);
 
                             pDialog = new ProgressDialog(Activity_Pending_Complaint_Update.this);
                             pDialog.setMessage("Please wait...");
@@ -352,7 +376,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                             queue = Volley.newRequestQueue(Activity_Pending_Complaint_Update.this);
                             Register_Complaint_for_other();
 
-                            System.out.println( "OTHER PROCESS  CALLED:: ");
+                            System.out.println("OTHER PROCESS  CALLED:: ");
                         } catch (Exception e) {
 
                         }
@@ -780,7 +804,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
     private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
         @Override
         public void onError(MediaRecorder mr, int what, int extra) {
-            //  Toast.makeText(MainActivity.this, "Error: " + what + ", " + extra, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Error: " + what + ", " + extra, Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -904,6 +928,10 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
         String str_register_complaint = "http://gemservice.in/employee_app/upload_image.php";
 
+        System.out.println("REG CAME" );
+        System.out.println("REG CAME" );
+        System.out.println("REG CAME" );
+        System.out.println("REG CAME" );
         File source = new File(imagepath1);
 
         StringRequest request = new StringRequest(Request.Method.POST,
@@ -916,7 +944,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
                 try {
                     FunctionAlert();
-                }catch (Exception e) {
+                } catch (Exception e) {
 
                 }
 
@@ -926,6 +954,10 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                     int success = obj.getInt("success");
 
                     System.out.println("REG" + success);
+                    System.out.println("REG" + success);
+                    System.out.println("REG" + success);
+                    System.out.println("REG" + success);
+
 
                     if (success == 1) {
 
@@ -967,14 +999,25 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                 params.put("status", str_comp_status);
                 params.put("desc", str_process_desc);
 
-                System.out.println(" Image : " + encodedstring);
-                System.out.println(" user : " + str_send_user_id);
-                System.out.println(" comp_number : " + str_comp_number);
-                System.out.println(" aud_name : " + str_aud_name);
-                System.out.println(" status : " + str_comp_status);
-                System.out.println(" desc : " + str_process_desc);
+                System.out.println("Image : " + encodedstring);
+                System.out.println("user : " + str_send_user_id);
+                System.out.println("comp_number : " + str_comp_number);
+                System.out.println("aud_name : " + str_aud_name);
+                System.out.println("status : " + str_comp_status);
+                System.out.println("desc : " + str_process_desc);
 
-                return params;
+                return checkParams(params);
+            }
+
+            private Map<String, String> checkParams(Map<String, String> map) {
+                Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry<String, String> pairs = (Map.Entry<String, String>) it.next();
+                    if (pairs.getValue() == null) {
+                        map.put(pairs.getKey(), "");
+                    }
+                }
+                return map;
             }
 
         };
@@ -1006,7 +1049,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
                 Log.d("Complaint_Number", response.toString());
                 try {
                     FunctionAlert();
-                }catch (Exception e) {
+                } catch (Exception e) {
 
                 }
 
@@ -1075,7 +1118,7 @@ public class Activity_Pending_Complaint_Update extends AppCompatActivity {
 
         new android.app.AlertDialog.Builder(Activity_Pending_Complaint_Update.this)
                 .setTitle("Gem India")
-                .setMessage("Compaint Updated Successfully :)")
+                .setMessage("Complaint Updated Successfully :)")
                 .setIcon(R.mipmap.ic_launcher)
 
                 .setPositiveButton("Done",

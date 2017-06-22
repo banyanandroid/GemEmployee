@@ -257,7 +257,7 @@ public class Services_Tab_CompletedComplaints extends AppCompatActivity implemen
 
     private void Function_GetCompleted_jobs() {
 
-        String str_url = "http://gemservice.in/employee_app/2017_Webservice.php?operation=Complaints_completed&code=1003&first=1&last=100";
+        String str_url = "http://gemservice.in/employee_app/2017_Webservice.php?operation=Complaints_completed&code="+str_user_id+"&first=1&last=100";
 
         StringRequest request = new StringRequest(Request.Method.GET,
                 str_url, new Response.Listener<String>() {

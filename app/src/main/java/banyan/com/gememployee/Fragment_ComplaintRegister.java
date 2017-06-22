@@ -671,10 +671,6 @@ public class Fragment_ComplaintRegister extends Fragment {
                             System.out.println("start year :" + str_year);
 
                             try {
-                                pDialog = new ProgressDialog(getActivity());
-                                pDialog.setMessage("Please wait...");
-                                pDialog.show();
-                                pDialog.setCancelable(false);
                                 queue = Volley.newRequestQueue(getActivity());
                                 Function_warranty();
                             } catch (Exception e) {
@@ -946,7 +942,6 @@ public class Fragment_ComplaintRegister extends Fragment {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                pDialog.hide();
             }
         }, new Response.ErrorListener() {
 
@@ -1176,7 +1171,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
         new AlertDialog.Builder(getActivity())
                 .setTitle("Gem India")
-                .setMessage("Compaint Registered Successfully :)")
+                .setMessage("Complaint Registered Successfully :)")
                 .setIcon(R.mipmap.ic_launcher)
 
                 .setPositiveButton("Done",

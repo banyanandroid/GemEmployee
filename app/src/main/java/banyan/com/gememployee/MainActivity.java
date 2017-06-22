@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                                                 int which) {
                                 // TODO Auto-generated method stub
                                 // finish();
-                                finish();
+                                finishAffinity();
                             }
                         }).show();
     }
