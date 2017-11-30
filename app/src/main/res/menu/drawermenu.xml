@@ -10,6 +10,11 @@
         android:title="Complaint Register" />
 
     <item
+        android:id="@+id/nav_item_amc_complaints"
+        android:icon="@mipmap/ic_complaint"
+        android:title="AMC Complaint Register" />
+
+    <item
         android:id="@+id/nav_item_services"
         android:icon="@mipmap/ic_services"
         android:title="Services" />

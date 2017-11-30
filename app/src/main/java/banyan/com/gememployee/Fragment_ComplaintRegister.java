@@ -216,7 +216,7 @@ public class Fragment_ComplaintRegister extends Fragment {
                 } else if (str_selected_product.equals("CHILLER")) {
 
                     layout_model.setVisibility(View.VISIBLE);
-                    str_warranty_type = "CHILLER";
+                    /*str_warranty_type = "CHILLER";*/
                     // Product Model Loder
                     Arraylist_product_model = new String[]{"CHA", "CHT"};
                     List<String> produt_type = new ArrayList<String>(Arrays.asList(Arraylist_product_model));
@@ -506,6 +506,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("CHA")) {
                     edt_model.setText("CHA");
+                    str_warranty_type = "CHA";
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -523,6 +524,7 @@ public class Fragment_ComplaintRegister extends Fragment {
 
                 } else if (str_selected_model.equals("CHT")) {
                     edt_model.setText("CHT");
+                    str_warranty_type = "CHT";
                     Arraylist_complaint_category = new String[]{"PRE COMMISSIONING", "COMMISSIONING", "COMPLAINT", "GENERAL", "AMC"};
                     List<String> complaint_category = new ArrayList<String>(Arrays.asList(Arraylist_complaint_category));
                     ArrayAdapter<String> adapter_complaint_category = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, complaint_category);
@@ -958,6 +960,10 @@ public class Fragment_ComplaintRegister extends Fragment {
                 params.put("year", str_year);
                 params.put("month", str_month);
                 params.put("type", str_warranty_type);
+
+                System.out.println("str_year " + str_year);
+                System.out.println("str_month " + str_month);
+                System.out.println("str_warranty_type " + str_warranty_type);
 
                 return params;
             }

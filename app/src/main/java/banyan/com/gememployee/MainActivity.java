@@ -78,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
                     xfragmentTransaction.replace(R.id.containerView, new Fragment_ComplaintRegister()).commit();
                 }
 
+                if (menuItem.getItemId() == R.id.nav_item_amc_complaints) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView, new Fragment_AMC_ComplaintRegister()).commit();
+                }
+
                 if (menuItem.getItemId() == R.id.nav_item_services) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerView, new Fragment_Services()).commit();

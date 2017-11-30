@@ -18,7 +18,7 @@ import android.widget.Button;
  */
 public class Fragment_Services extends Fragment {
 
-    Button btn_Completed_complaints, btn_pending_onprocess, btn_reg_complaints;
+    Button btn_Completed_complaints, btn_pending_onprocess, btn_reg_complaints,btn_reg_amc_complaints;
 
     @Nullable
     @Override
@@ -29,6 +29,7 @@ public class Fragment_Services extends Fragment {
         btn_pending_onprocess = (Button) rootview.findViewById(R.id.servies_btn_pending_onprocess);
         btn_Completed_complaints = (Button) rootview.findViewById(R.id.servies_btn_completed_complaints);
         btn_reg_complaints = (Button) rootview.findViewById(R.id.servies_btn_reg_complaints);
+        btn_reg_amc_complaints = (Button) rootview.findViewById(R.id.servies_btn_reg_amc_complaints);
 
         btn_pending_onprocess.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +56,16 @@ public class Fragment_Services extends Fragment {
             public void onClick(View view) {
 
                 Intent i = new Intent(getActivity(), Services_Tab_Reg_Complaints.class);
+                startActivity(i);
+
+            }
+        });
+
+        btn_reg_amc_complaints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), Services_Tab_Reg_AMC_Complaints.class);
                 startActivity(i);
 
             }

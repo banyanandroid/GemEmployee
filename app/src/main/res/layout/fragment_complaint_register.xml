@@ -504,7 +504,6 @@
                         android:layout_height="wrap_content"
                         android:hint="Contact Person Name *"
                         android:inputType="textCapSentences"
-                        android:maxLength="10"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
